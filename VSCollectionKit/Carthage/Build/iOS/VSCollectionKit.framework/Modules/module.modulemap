@@ -1,0 +1,11 @@
+framework module VSCollectionKit {
+  umbrella header "VSCollectionKit.h"
+
+  export *
+  module * { export * }
+}
+
+module VSCollectionKit.Swift {
+    header "VSCollectionKit-Swift.h"
+    requires objc
+}
