@@ -48,12 +48,20 @@ public protocol SectionDelegateHandler: AnyObject {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
                    _ cellModel: CellModel)
+    func willDisplayCell(collectionView: UICollectionView,
+                            indexPath: IndexPath,
+                            cell: UICollectionViewCell,
+                            cellModel: CellModel)
 }
 
 public extension SectionDelegateHandler {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
                    _ cellModel: CellModel) {}
+    func willDisplayCell(collectionView: UICollectionView,
+                         indexPath: IndexPath,
+                         cell: UICollectionViewCell,
+                         cellModel: CellModel) {}
 }
 
 public protocol SectionModel {

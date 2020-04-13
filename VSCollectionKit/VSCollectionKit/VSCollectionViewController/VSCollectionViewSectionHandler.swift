@@ -69,6 +69,14 @@ extension VSCollectionViewSectionHandller {
 }
 
 extension VSCollectionViewSectionHandller {
+
+    func willDisplayCell(collectionView: UICollectionView,
+                         indexPath: IndexPath,
+                         cell: UICollectionViewCell,
+                         sectionModel: SectionModel) {
+
+    }
+
     func didSelectItemAt(_ collectionView: UICollectionView,
                         indexPath: IndexPath,
                         sectionModel: SectionModel) {

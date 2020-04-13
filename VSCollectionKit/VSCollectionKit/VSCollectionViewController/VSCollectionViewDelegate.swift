@@ -29,6 +29,16 @@ public class VSCollectionViewDelegate: NSObject, UICollectionViewDelegate {
     }
 
     public func collectionView(_ collectionView: UICollectionView,
+                               willDisplay cell: UICollectionViewCell,
+                               forItemAt indexPath: IndexPath) {
+        guard let collectionData = data else { return }
+        sectionHandler.willDisplayCell(collectionView: collectionView,
+                                       indexPath: indexPath,
+                                       cell: cell,
+                                       sectionModel: collectionData.sections[indexPath.section])
+    }
+
+    public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
         guard let collectionData = data else { return }
         sectionHandler.didSelectItemAt(collectionView,
