@@ -52,10 +52,10 @@ public class VSCollectionViewSectionHandller {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType],
             let headerViewModel = sectionModel.header else { return nil }
 
-        return sectionHandler.supplementaryView(collectionView: collectionView,
-                                                kind: kind,
-                                                indexPath: indexPath,
-                                                headerViewModel: headerViewModel)
+        return sectionHandler.supplementaryViewProvider(collectionView,
+                                                        kind,
+                                                        indexPath,
+                                                        headerViewModel)
     }
 }
 
@@ -63,8 +63,8 @@ extension VSCollectionViewSectionHandller {
     func collectionLayout(for sectionModel: SectionModel,
                           environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return nil }
-        return sectionHandler.collectionLayout(for: sectionModel,
-                                               environment: environment)
+        return sectionHandler.sectionLayoutProvider(sectionModel,
+                                                    environment)
     }
 }
 
@@ -74,7 +74,11 @@ extension VSCollectionViewSectionHandller {
                          indexPath: IndexPath,
                          cell: UICollectionViewCell,
                          sectionModel: SectionModel) {
-
+        guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return }
+        sectionHandler.willDisplayCell(collectionView,
+                                       indexPath,
+                                       cell,
+                                       sectionModel.items[indexPath.row])
     }
 
     func didSelectItemAt(_ collectionView: UICollectionView,

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5316E27C2444872300D30576 /* MockSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E27B2444872300D30576 /* MockSectionModel.swift */; };
+		5316E27E2444874300D30576 /* MockCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E27D2444874300D30576 /* MockCellModel.swift */; };
+		5316E28024448D2F00D30576 /* MockSectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E27F24448D2F00D30576 /* MockSectionHandler.swift */; };
+		5316E28224448E7100D30576 /* VSCollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */; };
+		5316E28424449F6E00D30576 /* VSCollectionViewDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */; };
+		5316E2862444DFC900D30576 /* VSCollectionViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */; };
 		531DDD67243C859D0096EC9D /* VSCollectionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */; };
 		531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */; };
 		531DDD6E243C859D0096EC9D /* VSCollectionKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 531DDD60243C859D0096EC9D /* VSCollectionKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5316E27B2444872300D30576 /* MockSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSectionModel.swift; sourceTree = "<group>"; };
+		5316E27D2444874300D30576 /* MockCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCellModel.swift; sourceTree = "<group>"; };
+		5316E27F24448D2F00D30576 /* MockSectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSectionHandler.swift; sourceTree = "<group>"; };
+		5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
+		5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDelegateTests.swift; sourceTree = "<group>"; };
+		5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDataTests.swift; sourceTree = "<group>"; };
 		531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VSCollectionKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531DDD60243C859D0096EC9D /* VSCollectionKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VSCollectionKit.h; sourceTree = "<group>"; };
 		531DDD61243C859D0096EC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +110,12 @@
 			isa = PBXGroup;
 			children = (
 				531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */,
+				5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */,
+				5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */,
+				5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */,
+				5316E27B2444872300D30576 /* MockSectionModel.swift */,
+				5316E27D2444874300D30576 /* MockCellModel.swift */,
+				5316E27F24448D2F00D30576 /* MockSectionHandler.swift */,
 				531DDD6D243C859D0096EC9D /* Info.plist */,
 			);
 			path = VSCollectionKitTests;
@@ -243,7 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5316E2862444DFC900D30576 /* VSCollectionViewDataTests.swift in Sources */,
+				5316E28024448D2F00D30576 /* MockSectionHandler.swift in Sources */,
+				5316E27E2444874300D30576 /* MockCellModel.swift in Sources */,
+				5316E28224448E7100D30576 /* VSCollectionViewDataSourceTests.swift in Sources */,
 				531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */,
+				5316E28424449F6E00D30576 /* VSCollectionViewDelegateTests.swift in Sources */,
+				5316E27C2444872300D30576 /* MockSectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

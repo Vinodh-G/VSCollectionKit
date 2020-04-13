@@ -17,29 +17,29 @@ public protocol SectionHandler: SectionLayoutInfo, SectionHeaderFooter, SectionD
 }
 
 public protocol SectionHeaderFooter: AnyObject {
-    func supplementaryView(collectionView: UICollectionView,
-                           kind: String,
-                           indexPath: IndexPath,
-                           headerViewModel: HeaderViewModel) -> UICollectionReusableView?
+    func supplementaryViewProvider(_ collectionView: UICollectionView,
+                                   _ kind: String,
+                                   _ indexPath: IndexPath,
+                                   _ headerViewModel: HeaderViewModel) -> UICollectionReusableView?
 }
 
 public extension SectionHeaderFooter {
-    func supplementaryView(collectionView: UICollectionView,
-                           kind: String,
-                           indexPath: IndexPath,
-                           headerViewModel: HeaderViewModel) -> UICollectionReusableView? {
+    func supplementaryViewProvider(_ collectionView: UICollectionView,
+                                   _ kind: String,
+                                   _ indexPath: IndexPath,
+                                   _ headerViewModel: HeaderViewModel) -> UICollectionReusableView? {
         return nil
     }
 }
 
 public protocol SectionLayoutInfo: AnyObject {
-    func collectionLayout(for sectionModel: SectionModel,
-                          environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+    func sectionLayoutProvider(_ sectionModel: SectionModel,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
 }
 
 public extension SectionLayoutInfo  {
-    func collectionLayout(for sectionModel: SectionModel,
-                          environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+    func sectionLayoutProvider(_ sectionModel: SectionModel,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         return nil
     }
 }
@@ -48,24 +48,25 @@ public protocol SectionDelegateHandler: AnyObject {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
                    _ cellModel: CellModel)
-    func willDisplayCell(collectionView: UICollectionView,
-                            indexPath: IndexPath,
-                            cell: UICollectionViewCell,
-                            cellModel: CellModel)
+    func willDisplayCell(_ collectionView: UICollectionView,
+                         _ indexPath: IndexPath,
+                         _ cell: UICollectionViewCell,
+                         _ cellModel: CellModel)
 }
 
 public extension SectionDelegateHandler {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
                    _ cellModel: CellModel) {}
-    func willDisplayCell(collectionView: UICollectionView,
-                         indexPath: IndexPath,
-                         cell: UICollectionViewCell,
-                         cellModel: CellModel) {}
+    func willDisplayCell(_ collectionView: UICollectionView,
+                          _ indexPath: IndexPath,
+                          _ cell: UICollectionViewCell,
+                          _ cellModel: CellModel) {}
 }
 
 public protocol SectionModel {
     var sectionType: String { get }
+    var sectionID: String { get }
     var header: HeaderViewModel? { get }
     var items: [CellModel] { get set }
 }
@@ -76,4 +77,5 @@ public protocol HeaderViewModel {
 
 public protocol CellModel {
     var cellType: String { get }
+    var cellID: String { get }
 }
