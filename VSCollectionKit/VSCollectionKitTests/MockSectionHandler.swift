@@ -36,12 +36,11 @@ class MockSectionHandler: SectionHandler {
                                    _ headerViewModel: HeaderViewModel) -> UICollectionReusableView? {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                    withReuseIdentifier: "mockHeader",
-                                                                   for: IndexPath(item: 11, section: 0))
+                                                                   for: IndexPath(item: 11, section: 0)) as! MockHeaderView
         return view
     }
 
-    func collectionLayout(for sectionModel: SectionModel,
-                          environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+    func sectionLayoutProvider(_ sectionModel: SectionModel, _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let itemLayout = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -60,4 +59,16 @@ class MockCollectionViewCell: UICollectionViewCell {
 
 class MockHeaderView: UICollectionReusableView {
 
+}
+
+class MockLayoutEnvironment: NSObject, NSCollectionLayoutEnvironment {
+    var container: NSCollectionLayoutContainer = MockLayoutContainer()
+    var traitCollection: UITraitCollection = .current
+
+    class MockLayoutContainer: NSObject, NSCollectionLayoutContainer {
+        var contentSize: CGSize = .zero
+        var effectiveContentSize: CGSize = .zero
+        var contentInsets: NSDirectionalEdgeInsets = .zero
+        var effectiveContentInsets: NSDirectionalEdgeInsets = .zero
+    }
 }

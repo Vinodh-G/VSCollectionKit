@@ -24,6 +24,8 @@
 		531DDD95243C87D50096EC9D /* VSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8D243C87D50096EC9D /* VSCollectionViewController.swift */; };
 		531DDD96243C87D50096EC9D /* VSCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8E243C87D50096EC9D /* VSCollectionViewDataSource.swift */; };
 		531DDD97243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */; };
+		53A1FED22449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */; };
+		53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		531DDD8D243C87D50096EC9D /* VSCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSCollectionViewController.swift; sourceTree = "<group>"; };
 		531DDD8E243C87D50096EC9D /* VSCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSCollectionViewLayoutProvider.swift; sourceTree = "<group>"; };
+		53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewSectionHandlerTests.swift; sourceTree = "<group>"; };
+		53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewLayoutProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */,
 				5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */,
 				5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */,
+				53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */,
+				53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */,
 				5316E27B2444872300D30576 /* MockSectionModel.swift */,
 				5316E27D2444874300D30576 /* MockCellModel.swift */,
 				5316E27F24448D2F00D30576 /* MockSectionHandler.swift */,
@@ -263,11 +269,13 @@
 			files = (
 				5316E2862444DFC900D30576 /* VSCollectionViewDataTests.swift in Sources */,
 				5316E28024448D2F00D30576 /* MockSectionHandler.swift in Sources */,
+				53A1FED22449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift in Sources */,
 				5316E27E2444874300D30576 /* MockCellModel.swift in Sources */,
 				5316E28224448E7100D30576 /* VSCollectionViewDataSourceTests.swift in Sources */,
 				531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */,
 				5316E28424449F6E00D30576 /* VSCollectionViewDelegateTests.swift in Sources */,
 				5316E27C2444872300D30576 /* MockSectionModel.swift in Sources */,
+				53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
