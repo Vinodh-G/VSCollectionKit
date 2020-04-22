@@ -12,15 +12,17 @@ public class VSCollectionViewLayoutProvider {
 
     private var collectionView: UICollectionView
     private var sectionHandler: VSCollectionViewSectionHandller
+    public var data: VSCollectionViewData?
 
     public init(collectionView: UICollectionView,
-         sectionHandler: VSCollectionViewSectionHandller) {
+                sectionHandler: VSCollectionViewSectionHandller) {
         self.collectionView = collectionView
         self.sectionHandler = sectionHandler
     }
 
-    public func collectionLayout(for sectionModel: SectionModel,
+    public func collectionLayout(for sectionIndex: Int,
                                  environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+        guard let sectionModel = data?.sections[sectionIndex] else { return nil }
         return sectionHandler.collectionLayout(for: sectionModel,
                                                environment: environment)
     }

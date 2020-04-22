@@ -29,7 +29,6 @@ public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     public func apply(data: VSCollectionViewData,
                       animated: Bool) {
-
         handleCollectionView(collectionData: data)
     }
 
