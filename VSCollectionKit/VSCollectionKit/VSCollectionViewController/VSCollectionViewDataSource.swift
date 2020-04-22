@@ -10,9 +10,9 @@ import UIKit
 
 public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
-    private var collectionView: UICollectionView
+    unowned private var collectionView: UICollectionView
     private var data: VSCollectionViewData?
-    private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var sectionHandler: VSCollectionViewSectionHandller
     public init(collectionView: UICollectionView,
          sectionHandler: VSCollectionViewSectionHandller) {
         self.collectionView = collectionView
@@ -68,7 +68,7 @@ public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     private func handleCollectionView(collectionData: VSCollectionViewData) {
 
-        collectionView.performBatchUpdates({
+        collectionView.performBatchUpdates({  
 
             data = collectionData
             let updates = collectionData.update.updates

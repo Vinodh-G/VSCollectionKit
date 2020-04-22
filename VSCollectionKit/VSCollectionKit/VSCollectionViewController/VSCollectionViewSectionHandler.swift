@@ -18,8 +18,8 @@ public class VSCollectionViewSectionHandller {
         sectionHandlers[handler.type] = handler
     }
 
-    public func removeSectionHandler(handler: SectionHandler) {
-        sectionHandlers[handler.type] = nil
+    public func removeSectionHandler(type: String) {
+        sectionHandlers[type] = nil
     }
 
     public func registerCells(for collectionView: UICollectionView) {

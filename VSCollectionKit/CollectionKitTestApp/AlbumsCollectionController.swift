@@ -22,7 +22,8 @@ class AlbumsCollectionController: VSCollectionViewController {
 
     override func willAddSectionControllers() {
         super.willAddSectionControllers()
-        sectionHandler.addSectionHandler(handler: PhotosSectionHandler())
+        let photSectionHandler = PhotosSectionHandler()
+        sectionHandler.addSectionHandler(handler: photSectionHandler)
     }
 
     override func viewDidLoad() {

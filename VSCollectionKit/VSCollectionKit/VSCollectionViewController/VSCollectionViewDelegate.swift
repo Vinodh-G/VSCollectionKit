@@ -10,9 +10,9 @@ import UIKit
 
 public class VSCollectionViewDelegate: NSObject, UICollectionViewDelegate {
 
-    private var collectionView: UICollectionView
+    unowned private var collectionView: UICollectionView
     public var data: VSCollectionViewData?
-    private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var sectionHandler: VSCollectionViewSectionHandller
 
     public init(collectionView: UICollectionView,
          sectionHandler: VSCollectionViewSectionHandller) {

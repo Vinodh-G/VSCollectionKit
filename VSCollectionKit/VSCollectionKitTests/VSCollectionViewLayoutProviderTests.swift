@@ -31,7 +31,8 @@ class VSCollectionViewLayoutProviderTests: XCTestCase {
     func testExample() {
         let layoutProvider = VSCollectionViewLayoutProvider(collectionView: collectionView,
                                                             sectionHandler: mockSectionHandler)
-        XCTAssertNotNil(layoutProvider.collectionLayout(for: MockSectionModel(sectionType: "MockSection", sectionName: "Mock Section Name"),
+        layoutProvider.data = mockCollectionViewData()
+        XCTAssertNotNil(layoutProvider.collectionLayout(for: 0,
                                                         environment: MockLayoutEnvironment()))
     }
 

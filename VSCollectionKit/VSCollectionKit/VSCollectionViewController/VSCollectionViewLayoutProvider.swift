@@ -10,8 +10,8 @@ import UIKit
 
 public class VSCollectionViewLayoutProvider {
 
-    private var collectionView: UICollectionView
-    private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var collectionView: UICollectionView
+    unowned private var sectionHandler: VSCollectionViewSectionHandller
     public var data: VSCollectionViewData?
 
     public init(collectionView: UICollectionView,

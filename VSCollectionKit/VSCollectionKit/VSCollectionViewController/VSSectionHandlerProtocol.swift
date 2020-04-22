@@ -37,13 +37,6 @@ public protocol SectionLayoutInfo: AnyObject {
                                _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
 }
 
-//public extension SectionLayoutInfo  {
-//    func sectionLayoutProvider(_ sectionModel: SectionModel,
-//                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
-//        return nil
-//    }
-//}
-
 public protocol SectionDelegateHandler: AnyObject {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
