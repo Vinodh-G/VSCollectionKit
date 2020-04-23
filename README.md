@@ -57,8 +57,21 @@ The final touch of how are we applying the data to collectionView shown below.
 
 The below screens shots shows the UI implemented using VSCollectionKit with independant modules for each sections and less of UICollectionView related hazzles for cell size and cell data.
 
-![](/Images/VSCollectionKit_Examples.png)
 
+### How to Use
+
+Include the below line in the project cathrage file
+```
+  git "https://github.com/Vinodh-G/VSCollectionKit.git" >= 0.3
+```  
+and then call ``` carthage update ``` from the project folder where it is used.
+
+
+There is News Sample App have developed using the same VSCollectionKit, it supported via Cathrage.
+https://github.com/Vinodh-G/NewsApp
+
+
+  
 
 
 
