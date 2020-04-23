@@ -1,7 +1,7 @@
 # VSCollectionKit
 
 
-![](/Images/VSCollectionKit_Examples.png)
+![](Images/VSCollectionKit_Examples2.png)
 
 VSCollectionKit is handy framework supporting funtionality of a UICollectionView or UICollectionViewController with much easier than way we work with UICollectionView, and avoiding a lot of code duplicates. 
 
