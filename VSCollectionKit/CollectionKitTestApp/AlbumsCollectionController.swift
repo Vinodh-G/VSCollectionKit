@@ -28,7 +28,7 @@ class AlbumsCollectionController: VSCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "10 Mar 2020"
         viewModel?.fetchPhotos(callBack: { [weak self] (collectionData, errorString) in
             guard let self = self,
                 let collectionData = collectionData else { return }
