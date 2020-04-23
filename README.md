@@ -1,5 +1,8 @@
 # VSCollectionKit
 
+
+![](/Images/VSCollectionKit_Examples.png)
+
 VSCollectionKit is handy framework supporting funtionality of a UICollectionView or UICollectionViewController with much easier than way we work with UICollectionView, and avoiding a lot of code duplicates. 
 
 VSCollectionKit consist of VSCollectionViewController is subclass of UIViewController with UICollectionView, VSCollectionViewController works in association with 5 other parts like 
