@@ -18,7 +18,9 @@ class PhotosSectionHandler: SectionHandler {
         collectionView.register(PhotoTumbnailCell.self, forCellWithReuseIdentifier: PhotoTumbnailCell.resuseId)
     }
 
-    func cellProvider(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ cellModel: CellModel) -> UICollectionViewCell {
+    func cellProvider(_ collectionView: UICollectionView,
+                      _ indexPath: IndexPath,
+                      _ cellModel: CellModel) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoTumbnailCell.resuseId,
                                                             for: indexPath) as? PhotoTumbnailCell,
             let photoCellModel = cellModel as? PhotoCellModel else {
@@ -29,7 +31,8 @@ class PhotosSectionHandler: SectionHandler {
         return cell
     }
 
-    func sectionLayoutProvider(_ sectionModel: SectionModel, _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+    func sectionLayoutProvider(_ sectionModel: SectionModel,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25),
                                               heightDimension: .fractionalHeight(1))
         let itemLayout = NSCollectionLayoutItem(layoutSize: itemSize)
