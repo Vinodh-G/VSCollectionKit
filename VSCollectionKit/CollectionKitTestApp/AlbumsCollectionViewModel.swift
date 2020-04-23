@@ -27,8 +27,8 @@ class AlbumCollectionViewModel: AlbumCollectionViewAPI {
 
     func fetchPhotos(callBack: @escaping CallBack) {
         guard let urls = interactor.fetchAlbumUrls() else { return }
-        let section = AlbumSectionModel(photoUrls: urls)
         var collectionData = VSCollectionViewData()
+        let section = AlbumSectionModel(photoUrls: urls)
         collectionData.add(section: section)
         collectionViewData = collectionData
         callBack(collectionData, nil)
