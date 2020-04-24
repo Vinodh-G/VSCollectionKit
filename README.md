@@ -3,62 +3,63 @@
 
 ![](Images/VSCollectionKit_Examples2.png)
 
-VSCollectionKit is handy framework supporting funtionality of a UICollectionView or UICollectionViewController with much easier than way we work with UICollectionView, and avoiding a lot of code duplicates. 
+VSCollectionKit is a handy framework supporting functionality of a UICollectionView or UICollectionViewController in a much simpler way. VSCollectionKit also avoids a lot of collectionView related code hassle and duplicates.
 
-VSCollectionKit consist of VSCollectionViewController is subclass of UIViewController with UICollectionView, VSCollectionViewController works in association with 5 other parts like 
+### VSCollectionKit Components
+VSCollectionKit consist of VSCollectionViewController which  is subclass of UIViewController with UICollectionView. 
+VSCollectionViewController works in association with 5 other parts like
 - VSCollectionViewDataSource
 - VSCollectionViewData
 - VSCollectionViewDelegate
 - VSCollectionViewLayoutProvider
 - VSCollectionViewSectionHandller
 
-As the names of the above components slightly justifys what actaully they are meant for, still will go over one by one
+Though the component names justify their functionality, a brief description for our strong foundations.
 
-**VSCollectionViewDataSource** is subclass of NSObject confirming to UICollectionViewDataSource, this is class which is mainly involved in handling or supplying data to our collectionView, is takes VSCollectionViewData and applies the new insertions or update changes to current UICollectionView.
-this is very import piece in VSCollectionKit, we moslty not be interacting with it, we only talk directly to VSCollectionViewController
+**VSCollectionViewDataSource** is a subclass of NSObject confirming to UICollectionViewDataSource mainly involved in handling or supplying data to our collectionView. It takes VSCollectionViewData and applies inserting and updating the  changes to the current UICollectionView.
 
-**VSCollectionViewData** is struct, it moslty contains the details about our data to be displayed on CollectionView, 
-this contains array of sections confirming to SectionModel protocol, and an updates array containing details about the changes in data which is getting applied to a collection via VSCollectionViewDataSource.
+**VSCollectionViewData** is a struct that mostly contains the details about our data to be displayed on CollectionView. It contains an array of sections confirming to SectionModel protocol. Also, updates array containing details about the changes in data which is getting applied to a collection via VSCollectionViewDataSource.
 
 The SectionModel, CellModel and HeaderViewModel protocols looks somthing like below
 ![](Images/SectionModelPototcol.png)
 
-**VSCollectionViewDelegate** is subclass of NSObject confirming to UICollectionViewDelegate, this class  mainly involved in handling delegate events of collectionView, not we are not using this delegate for determining the size of cell or supplementary view
+**VSCollectionViewDelegate** is subclass of NSObject confirming to UICollectionViewDelegate. This class mainly involves handling delegate events of collectionView. Please note that we are not using this delegate for determining the size of cell or supplementary view.
 
+**VSCollectionViewLayoutProvider** is component who is responsible for supplying the layout information to the collectionView. VSCollectionKit uses UICollectionViewCompostionalLayout for cell and supplementaryview size information.
 
-**VSCollectionViewLayoutProvider** as name suggests that is guy is resposible for supplying the layout informations to collectionView, this is using UICollectionViewCompostionalLayout, but still will not be using it direclty rather we would be supplying the layout information for each section via this class
-
-**VSCollectionViewSectionHandller** the last and important component of VSCollectionKit with which we would be moslty interacting with, we would be supplying the cell information, layout information and handling events from the collectionView via VSCollectionViewSectionHandller, will look the below class diagram to find more details on how are they connected.
+**VSCollectionViewSectionHandller** would supply the cell information, layout information and helps in handling events from the collectionView via VSCollectionViewSectionHandller.
 
 ![](Images/VSCollectionKit_Class_Diagram.png)
 
-Thats little knowledge on the VSCollectionKit and its componets, now lets dig a little on how to use it.
+That's the theoretical view VSCollectionKit and its components!!!!
 
-**VSCollectionViewSectionHandller** handles the adding and removing of SectionHandler for the VSCollectionViewController, so we can n number of sections supported by collectionview via VSCollectionViewSectionHandller's addSectionHandler(handler: SectionHandler) funtion 
+### How to use VSCollectionKit?
+
+**VSCollectionViewSectionHandller** VSCollectionViewSectionHandller handles adding and removing of SectionHandler for the VSCollectionViewController. We can have n number of sections supported by collectionview via VSCollectionViewSectionHandller's addSectionHandler(handler: SectionHandler) function.
 
 The protocol declaration of SectionHandler is as below.
 ![](/Images/SectionHandlerProtocol.png)
 
-Looking at the methods we might have few insights where all our collections related funtions falls, yes, its all falls in the indiviual SectionHandler, its very light weight because it contains only the nessary funtions to be implemented, if we still need more we can always go and extent it from components like DataSource and Delegate.
+Probably you caught them right!! Yes the collectionview related functions falls in the individual SectionHandler.It seems to be less complexed because it contains only the necessary functions to be implemented, if we still need more we can always go and extent it from components like VSCollectionViewDataSource and VSCollectionViewDelegate.
 
-Lets see a quick example on how we can use a VSCollectionKit to display gird of photos from local.
+# An example on how we can use VSCollectionKit to display grid of photos from local.
 
-As we know the VSCollectionViewController understands data by VSCollectionData, so our example is quite simple showing list of photos in CollectionView, we would be converting the list of images urls into VSCollectionData's SectionModel and CellModel.
+As you know, the VSCollectionViewController understands data by VSCollectionData, so our example is quite simple showing list of photos in CollectionView. We would be converting the list of image urls to VSCollectionData's SectionModel and CellModel.
 
 A quick snippet of what i was talking about.
 ![](/Images/AlbumSectionmodel.png)
 
-Thinking for how are we provinding the cell and layout information? yea I am coming right there, we need to create a class confirming protocol SectionHandler, which is where we would be implementing the nessary functions to sypply the cell and layout informations to the collection view.
+Having a thought on how we are providing the cell and layout information? Let's think it together! We need to create a class confirming to protocol SectionHandler, which is where we would be implementing the necessary functions to supply the cell and layout information to the collection view.
+
 ![](/Images/AlbumsSectionHandlers.png)
 
 The final touch of how are we applying the data to collectionView shown below.
 ![](/Images/QuickSnipet_Howtoapplycollectiondat.png)
+So we need to override func willAddSectionControllers() and add all the sectionHandlers which we would be using in our collectionView, provided each sectionControllers should confirm to protocol SectionHandler as shown above.
 
 
-The below screens shots shows the UI implemented using VSCollectionKit with independant modules for each sections and less of UICollectionView related hazzles for cell size and cell data.
 
-
-### How to Use
+### How to Use VSCollectionKit in project
 
 Include the below line in the project cathrage file
 ```
