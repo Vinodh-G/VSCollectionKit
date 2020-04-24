@@ -46,7 +46,7 @@ Lets see a quick example on how we can use a VSCollectionKit to display gird of 
 As we know the VSCollectionViewController understands data by VSCollectionData, so our example is quite simple showing list of photos in CollectionView, we would be converting the list of images urls into VSCollectionData's SectionModel and CellModel.
 
 A quick snippet of what i was talking about.
-![](/Images/SectionModelPototcol.png)
+![](/Images/AlbumSectionmodel.png)
 
 Thinking for how are we provinding the cell and layout information? yea I am coming right there, we need to create a class confirming protocol SectionHandler, which is where we would be implementing the nessary functions to sypply the cell and layout informations to the collection view.
 ![](/Images/AlbumsSectionHandlers.png)
