@@ -1,9 +1,21 @@
 # VSCollectionKit
 
 
+**VSCollectionKit** is a library for building applications views/screens in a consistent and understandable way, with advantages like composition, independent and testing.
+
+VSCollectionView a handy framework supporting functionality of a UICollectionView or UICollectionViewController in a much simpler way. VSCollectionKit also avoids a lot of collectionView related code hassle and duplicates.
+
+Lets see what we get using this kit for developing the application views.
+
+**Composition:** VSCollectionKit breaks down larger features into smaller components that can be isolated modules and be easily combined to form a full feature.
+
+**Mobility:** Using VSCollectionKit, we can develop a component to be independent ie., the component doesn't know anything about the user using it. This gives us a confident of using it in multiple places of same project hassle free.
+
+**Testing:** Using VSCollectionKit, each and every component can be tested individually. As it makes smaller independent components to become a bigger complex viewcontrollers, there will be less or NIL integrity issues (fixing in one place which causes a bug in a different place).
+
+Here is an example that helps you to understand better. The screenshots of the Test app developed using VSCollectionKit presented below.
 ![](Images/VSCollectionKit_Examples2.png)
 
-VSCollectionKit is a handy framework supporting functionality of a UICollectionView or UICollectionViewController in a much simpler way. VSCollectionKit also avoids a lot of collectionView related code hassle and duplicates.
 
 ### VSCollectionKit Components
 VSCollectionKit consist of VSCollectionViewController which  is subclass of UIViewController with UICollectionView. 
