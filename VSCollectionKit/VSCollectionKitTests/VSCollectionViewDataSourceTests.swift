@@ -13,8 +13,9 @@ import UIKit
 class VSCollectionViewDataSourceTests: XCTestCase {
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let sectionHandler = VSCollectionViewSectionHandller()
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sectionHandler.addSectionHandler(handler: MockSectionHandler())
     }
 
     override func tearDown() {
@@ -63,8 +64,6 @@ class VSCollectionViewDataSourceTests: XCTestCase {
     }
 
     private func vsDataSource() -> VSCollectionViewDataSource {
-        let sectionHandler = VSCollectionViewSectionHandller()
-        sectionHandler.addSectionHandler(handler: MockSectionHandler())
         let dataSource = VSCollectionViewDataSource(collectionView: collectionView,
                                                     sectionHandler: sectionHandler)
 

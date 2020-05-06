@@ -13,10 +13,13 @@ import UIKit
 class VSCollectionViewLayoutProviderTests: XCTestCase {
 
     var collectionView: UICollectionView!
+    let sectionHandler = VSCollectionViewSectionHandller()
 
     override func setUp() {
+        sectionHandler.addSectionHandler(handler: MockSectionHandler())
+
         let collectionViewLayout = UICollectionViewCompositionalLayout { (section, enivronment) -> NSCollectionLayoutSection? in
-            return self.mockSectionHandler.collectionLayout(for: MockSectionModel(sectionType: "MockSection",
+            return self.sectionHandler.collectionLayout(for: MockSectionModel(sectionType: "MockSection",
             sectionName: "Mock Seciton Name"),
                                                             environment: MockLayoutEnvironment())
         }
@@ -30,16 +33,9 @@ class VSCollectionViewLayoutProviderTests: XCTestCase {
 
     func testExample() {
         let layoutProvider = VSCollectionViewLayoutProvider(collectionView: collectionView,
-                                                            sectionHandler: mockSectionHandler)
+                                                            sectionHandler: sectionHandler)
         layoutProvider.data = mockCollectionViewData()
         XCTAssertNotNil(layoutProvider.collectionLayout(for: 0,
                                                         environment: MockLayoutEnvironment()))
     }
-
-    var mockSectionHandler: VSCollectionViewSectionHandller {
-        let sectionHand = VSCollectionViewSectionHandller()
-        sectionHand.addSectionHandler(handler: MockSectionHandler())
-        return sectionHand
-    }
-
 }
