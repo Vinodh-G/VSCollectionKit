@@ -79,12 +79,16 @@ Include the below line in the project cathrage file
 ```  
 and then call ``` carthage update ``` from the project folder where it is used.
 
+The above step will get vscollectionkit to your project, now go to your app project settings
+click on build phase, scroll to embed framework section.
+Add vscollectionkit.framework to embed framework section by clicking the + icon (Note you can find the vscollectionkit.framework in path /Carthage/Build/iOS/VSCollectionKit.framework inside your project) 
+
+Something similar as shown below used in the NewsApp.
+<img width="1056" alt="B337147C-70E1-4052-9CAB-31648F76AEFD" src="https://user-images.githubusercontent.com/5305527/81490517-cbcf3b00-92a0-11ea-8e82-ffd29de1a025.png">
+
+
 
 There is News Sample App have developed using the same VSCollectionKit, it supported via Cathrage.
 https://github.com/Vinodh-G/NewsApp
-
-
-  
-
 
 
