@@ -448,4 +448,14 @@ class VSCollectionViewDataTests: XCTestCase {
         XCTAssertEqual(collectionData.update.updates[3].updatedRows, [IndexPath(item: 20, section: 0)])
         XCTAssertEqual(collectionData.update.updates[4].updatedRows, [IndexPath(item: 5, section: 1)])
     }
+
+    func testUpdateItemsTwoSectionVerifyUpdateIndexPath() {
+        var collectionData = mockCollectionViewData()
+        collectionData.resetUpdate()
+
+        let newItem = MockCellModel(cellType: "MockCell",
+                                    cellInfo: "Cell Info 1")
+        collectionData.update(item: newItem, indexPath: IndexPath(item: 0, section: 0))
+        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [IndexPath(item: 0, section: 0)])
+    }
 }

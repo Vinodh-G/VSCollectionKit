@@ -57,6 +57,8 @@ public struct VSCollectionViewData {
         updates.append(update)
     }
 
+
+
     public func sectionModel(for type: String) -> SectionModel? {
         guard let sectionIndex = sections.firstIndex(where: { $0.sectionType == type }) else { return nil }
         return sections[sectionIndex]
@@ -84,10 +86,26 @@ public struct VSCollectionViewData {
         updates.append(update)
     }
 
-    // TODO: Yet to implement Update Items In Section
+    public mutating func update(item: CellModel, indexPath: IndexPath) {
+
+        guard sections.count > indexPath.section,
+            sections[indexPath.section].items.count > indexPath.item else { return }
+
+        var sectionModel = sections[indexPath.section]
+        sectionModel.items.remove(at: indexPath.item)
+        sectionModel.items.insert(item, at: indexPath.item)
+
+        let update = VSCollectionViewUpdate.Update(type: .insert,
+                                                   sections: nil,
+                                                   rows: [indexPath])
+        updates.append(update)
+    }
 
     public mutating func deleteItem(at indexPath: IndexPath) {
 
+        guard sections.count > indexPath.section,
+            sections[indexPath.section].items.count > indexPath.item else { return }
+        
         var newSection = sections[indexPath.section]
         newSection.items.remove(at: indexPath.row)
         sections[indexPath.section] = newSection
