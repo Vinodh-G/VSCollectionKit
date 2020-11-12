@@ -9,6 +9,7 @@
 import XCTest
 import UIKit
 @testable import VSCollectionKit
+@testable import VSCollectionViewData
 
 class VSCollectionViewDataSourceTests: XCTestCase {
 

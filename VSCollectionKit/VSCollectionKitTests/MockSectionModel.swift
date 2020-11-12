@@ -6,7 +6,8 @@
 //  Copyright © 2020 Vinodh Govindaswamy. All rights reserved.
 //
 
-@testable import VSCollectionKit
+import Foundation
+@testable import VSCollectionViewData
 
 struct MockSectionModel: SectionModel {
     var sectionType: String
@@ -18,7 +19,7 @@ struct MockSectionModel: SectionModel {
     init(sectionType: String, sectionName: String) {
         self.sectionType = sectionType
         self.sectionName = sectionName
-        sectionID = UUID().uuidString
+        sectionID = ProcessInfo.processInfo.globallyUniqueString
         header = MockSectionHeader(headerType: sectionType)
 
         for index in 0..<20 {

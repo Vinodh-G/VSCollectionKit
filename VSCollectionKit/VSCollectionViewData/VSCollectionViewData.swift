@@ -133,7 +133,7 @@ public struct VSCollectionViewData {
     }
 }
 
-public struct DataIndexPath {
+public struct DataIndexPath: Equatable {
     
     public let item: Int
     public let section: Int

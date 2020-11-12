@@ -7,6 +7,7 @@
 //
 
 @testable import VSCollectionKit
+@testable import VSCollectionViewData
 import XCTest
 
 class VSCollectionViewDataTests: XCTestCase {
@@ -135,7 +136,7 @@ class VSCollectionViewDataTests: XCTestCase {
     func testUpdateItemsVerifyItemsCount() {
         var collectionData = mockCollectionViewData()
         XCTAssertEqual(collectionData.sections[0].items.count, 20)
-        collectionData.deleteItem(at: IndexPath(item: 2, section: 0))
+        collectionData.deleteItem(at: DataIndexPath(item: 2, section: 0))
         XCTAssertEqual(collectionData.sections[0].items.count, 19)
     }
 
@@ -151,7 +152,7 @@ class VSCollectionViewDataTests: XCTestCase {
     func testDeleteItemsVerifyItemsCount() {
         var collectionData = mockCollectionViewData()
         XCTAssertEqual(collectionData.sections[0].items.count, 20)
-        collectionData.deleteItem(at: IndexPath(item: 2, section: 0))
+        collectionData.deleteItem(at: DataIndexPath(item: 2, section: 0))
         XCTAssertEqual(collectionData.sections[0].items.count, 19)
     }
 
@@ -159,7 +160,7 @@ class VSCollectionViewDataTests: XCTestCase {
         var collectionData = mockCollectionViewData()
         guard let cellModel = collectionData.sections[0].items[2] as? MockCellModel else { return }
         XCTAssertEqual(cellModel.info, "Cell 2")
-        collectionData.deleteItem(at: IndexPath(item: 2, section: 0))
+        collectionData.deleteItem(at: DataIndexPath(item: 2, section: 0))
 
         guard let newCellModel = collectionData.sections[0].items[2] as? MockCellModel else { return }
         XCTAssertEqual(newCellModel.info, "Cell 3")
@@ -251,8 +252,8 @@ class VSCollectionViewDataTests: XCTestCase {
         collectionData.add(items: [newItem1], to: collectionData.sections[0])
         collectionData.add(items: [newItem2], to: collectionData.sections[1])
 
-        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [IndexPath(item: 20, section: 0)])
-        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [IndexPath(item: 20, section: 1)])
+        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [DataIndexPath(item: 20, section: 0)])
+        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [DataIndexPath(item: 20, section: 1)])
     }
 
     func testInsertItemsTwoSectionVerifyUpdateType() {
@@ -312,11 +313,11 @@ class VSCollectionViewDataTests: XCTestCase {
         var collectionData = mockCollectionViewData()
         collectionData.resetUpdate()
 
-        collectionData.deleteItem(at: IndexPath(item: 0, section: 0))
-        collectionData.deleteItem(at: IndexPath(item: 19, section: 1))
+        collectionData.deleteItem(at: DataIndexPath(item: 0, section: 0))
+        collectionData.deleteItem(at: DataIndexPath(item: 19, section: 1))
 
-        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [IndexPath(item: 0, section: 0)])
-        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [IndexPath(item: 19, section: 1)])
+        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [DataIndexPath(item: 0, section: 0)])
+        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [DataIndexPath(item: 19, section: 1)])
     }
 
     // MARK: CollectionData Reload Updates
@@ -415,15 +416,15 @@ class VSCollectionViewDataTests: XCTestCase {
         let newSection1 = MockSectionModel(sectionType: "MockSection", sectionName: "Section Three")
         collectionData.insert(section: newSection1, at: 0)
         collectionData.add(items: [MockCellModel(cellType: "MockCell", cellInfo: "Cell 21")], to: collectionData.sections[1])
-        collectionData.deleteItem(at: IndexPath(item: 19, section: 1))
+        collectionData.deleteItem(at: DataIndexPath(item: 19, section: 1))
 
         let section3 = collectionData.sections[2]
         collectionData.delete(section: section3)
         collectionData.update(newSection: newSection1)
 
         XCTAssertEqual(collectionData.update.updates[0].updatedSections, IndexSet(integer: 0))
-        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [IndexPath(item: 20, section: 1)])
-        XCTAssertEqual(collectionData.update.updates[2].updatedRows, [IndexPath(item: 19, section: 1)])
+        XCTAssertEqual(collectionData.update.updates[1].updatedRows, [DataIndexPath(item: 20, section: 1)])
+        XCTAssertEqual(collectionData.update.updates[2].updatedRows, [DataIndexPath(item: 19, section: 1)])
         XCTAssertEqual(collectionData.update.updates[3].updatedSections, IndexSet(integer: 2))
         XCTAssertEqual(collectionData.update.updates[4].updatedSections, IndexSet(integer: 0))
     }
@@ -440,13 +441,13 @@ class VSCollectionViewDataTests: XCTestCase {
         collectionData.update(newSection: newSection1)
 
         collectionData.add(items: [MockCellModel(cellType: "MockCell", cellInfo: "Cell 21")], to: collectionData.sections[0])
-        collectionData.deleteItem(at: IndexPath(item: 5, section: 1))
+        collectionData.deleteItem(at: DataIndexPath(item: 5, section: 1))
 
         XCTAssertEqual(collectionData.update.updates[0].updatedSections, IndexSet(integer: 0))
         XCTAssertEqual(collectionData.update.updates[1].updatedSections, IndexSet(integer: 2))
         XCTAssertEqual(collectionData.update.updates[2].updatedSections, IndexSet(integer: 0))
-        XCTAssertEqual(collectionData.update.updates[3].updatedRows, [IndexPath(item: 20, section: 0)])
-        XCTAssertEqual(collectionData.update.updates[4].updatedRows, [IndexPath(item: 5, section: 1)])
+        XCTAssertEqual(collectionData.update.updates[3].updatedRows, [DataIndexPath(item: 20, section: 0)])
+        XCTAssertEqual(collectionData.update.updates[4].updatedRows, [DataIndexPath(item: 5, section: 1)])
     }
 
     func testUpdateItemsTwoSectionVerifyUpdateIndexPath() {
@@ -455,7 +456,7 @@ class VSCollectionViewDataTests: XCTestCase {
 
         let newItem = MockCellModel(cellType: "MockCell",
                                     cellInfo: "Cell Info 1")
-        collectionData.update(item: newItem, indexPath: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [IndexPath(item: 0, section: 0)])
+        collectionData.update(item: newItem, indexPath: DataIndexPath(item: 0, section: 0))
+        XCTAssertEqual(collectionData.update.updates[0].updatedRows, [DataIndexPath(item: 0, section: 0)])
     }
 }

@@ -6,7 +6,8 @@
 //  Copyright © 2020 Vinodh Govindaswamy. All rights reserved.
 //
 
-@testable import VSCollectionKit
+import Foundation
+@testable import VSCollectionViewData
 
 struct MockCellModel: CellModel {
     let cellType: String
@@ -16,6 +17,6 @@ struct MockCellModel: CellModel {
     init(cellType: String, cellInfo: String) {
         self.cellType = cellType
         self.info = cellInfo
-        cellID = UUID().uuidString
+        cellID = ProcessInfo.processInfo.globallyUniqueString
     }
 }

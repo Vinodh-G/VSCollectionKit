@@ -7,6 +7,7 @@
 //
 
 import VSCollectionKit
+import VSCollectionViewData
 import UIKit
 
 class MockSectionHandler: SectionHandler {
