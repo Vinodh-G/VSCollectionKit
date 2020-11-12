@@ -25,9 +25,9 @@ public struct VSCollectionViewUpdate {
     public struct Update {
         public let type: UpdateType
         public var updatedSections: IndexSet? = nil
-        public var updatedRows: [IndexPath]? = nil
+        public var updatedRows: [DataIndexPath]? = nil
 
-        public init(type: UpdateType, sections: IndexSet?, rows: [IndexPath]?) {
+        public init(type: UpdateType, sections: IndexSet?, rows: [DataIndexPath]?) {
             self.type = type
             self.updatedSections = sections
             self.updatedRows = rows

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VSCollectionViewData
 
 public class VSCollectionViewDelegate: NSObject, UICollectionViewDelegate {
 

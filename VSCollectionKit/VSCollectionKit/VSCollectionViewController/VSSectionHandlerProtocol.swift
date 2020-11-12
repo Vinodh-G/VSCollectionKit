@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VSCollectionViewData
 
 public protocol SectionHandler: SectionLayoutInfo, SectionHeaderFooter, SectionDelegateHandler {
     var type: String { get }
@@ -55,20 +56,4 @@ public extension SectionDelegateHandler {
                           _ indexPath: IndexPath,
                           _ cell: UICollectionViewCell,
                           _ cellModel: CellModel) {}
-}
-
-public protocol SectionModel {
-    var sectionType: String { get }
-    var sectionID: String { get }
-    var header: HeaderViewModel? { get }
-    var items: [CellModel] { get set }
-}
-
-public protocol HeaderViewModel {
-    var headerType: String { get }
-}
-
-public protocol CellModel {
-    var cellType: String { get }
-    var cellID: String { get }
 }

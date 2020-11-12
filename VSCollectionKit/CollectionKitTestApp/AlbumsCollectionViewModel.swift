@@ -6,7 +6,8 @@
 //  Copyright © 2020 Vinodh Govindaswamy. All rights reserved.
 //
 
-import VSCollectionKit
+import Foundation
+import VSCollectionViewData
 
 protocol AlbumCollectionViewAPI {
     var collectionViewData: VSCollectionViewData? { get set }
@@ -45,7 +46,7 @@ struct AlbumSectionModel: SectionModel {
     var items: [CellModel] = []
 
     init(photoUrls: [String]) {
-        self.sectionID = UUID().uuidString
+        self.sectionID = ProcessInfo.processInfo.globallyUniqueString
         photoUrls.forEach { (url) in
             items.append(PhotoCellModel(photoUrl: url))
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import VSCollectionKit
+import VSCollectionViewData
 
 class PhotosSectionHandler: SectionHandler {
     var type: String {

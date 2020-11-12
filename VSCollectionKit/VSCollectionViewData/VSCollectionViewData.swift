@@ -7,6 +7,23 @@
 //
 
 import Foundation
+import UIKit
+
+public protocol SectionModel {
+    var sectionType: String { get }
+    var sectionID: String { get }
+    var header: HeaderViewModel? { get }
+    var items: [CellModel] { get set }
+}
+
+public protocol HeaderViewModel {
+    var headerType: String { get }
+}
+
+public protocol CellModel {
+    var cellType: String { get }
+    var cellID: String { get }
+}
 
 public struct VSCollectionViewData {
     public var sections: [SectionModel] = []
@@ -21,10 +38,10 @@ public struct VSCollectionViewData {
         updates.removeAll()
     }
 
-    mutating public func insert(section: SectionModel, at index: Int) {
-        sections.insert(section, at: index)
+    mutating public func insert(section: SectionModel, at sectionIndex: Int) {
+        sections.insert(section, at: sectionIndex)
         let update = VSCollectionViewUpdate.Update(type: .insert,
-                                              sections: IndexSet(integer: index), rows: nil)
+                                              sections: IndexSet(integer: sectionIndex), rows: nil)
         updates.append(update)
     }
 
@@ -45,9 +62,10 @@ public struct VSCollectionViewData {
         newSection.items.append(contentsOf: items)
         sections[sectionIndex] = newSection
 
-        var indexPaths: [IndexPath] = []
+        var indexPaths: [DataIndexPath] = []
         for index in section.items.count..<(newSection.items.count) {
-            indexPaths.append(IndexPath(row: index, section: sectionIndex))
+            let newPath = DataIndexPath(item: index, section: sectionIndex)
+            indexPaths.append(newPath)
         }
 
         let update = VSCollectionViewUpdate.Update(type: .insert,
@@ -56,8 +74,6 @@ public struct VSCollectionViewData {
 
         updates.append(update)
     }
-
-
 
     public func sectionModel(for type: String) -> SectionModel? {
         guard let sectionIndex = sections.firstIndex(where: { $0.sectionType == type }) else { return nil }
@@ -86,7 +102,7 @@ public struct VSCollectionViewData {
         updates.append(update)
     }
 
-    public mutating func update(item: CellModel, indexPath: IndexPath) {
+    public mutating func update(item: CellModel, indexPath: DataIndexPath) {
 
         guard sections.count > indexPath.section,
             sections[indexPath.section].items.count > indexPath.item else { return }
@@ -101,18 +117,29 @@ public struct VSCollectionViewData {
         updates.append(update)
     }
 
-    public mutating func deleteItem(at indexPath: IndexPath) {
+    public mutating func deleteItem(at indexPath: DataIndexPath) {
 
         guard sections.count > indexPath.section,
             sections[indexPath.section].items.count > indexPath.item else { return }
         
         var newSection = sections[indexPath.section]
-        newSection.items.remove(at: indexPath.row)
+        newSection.items.remove(at: indexPath.item)
         sections[indexPath.section] = newSection
 
         let update = VSCollectionViewUpdate.Update(type: .delete,
                                               sections: nil,
                                               rows: [indexPath])
         updates.append(update)
+    }
+}
+
+public struct DataIndexPath {
+    
+    public let item: Int
+    public let section: Int
+    /// Initialize for use with `VSCollectionData`.
+    public init(item: Int, section: Int) {
+        self.item = item
+        self.section = section
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VSCollectionViewData
 
 public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
@@ -82,21 +83,24 @@ public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
                         collectionView.insertSections(insertedSection)
                     }
                     if let insertedRows = update.updatedRows {
-                        collectionView.insertItems(at: insertedRows)
+                        let insertedItems = insertedRows.map{ IndexPath(item: $0.item, section: $0.section) }
+                        collectionView.insertItems(at: insertedItems)
                     }
                 case .delete:
                     if let deletedSection = update.updatedSections {
                         collectionView.deleteSections(deletedSection)
                     }
                     if let deletedRows = update.updatedRows {
-                        collectionView.deleteItems(at: deletedRows)
+                        let deletedItems = deletedRows.map{ IndexPath(item: $0.item, section: $0.section) }
+                        collectionView.deleteItems(at: deletedItems)
                     }
                 case .reload:
                     if let reloadSections = update.updatedSections {
                         collectionView.reloadSections(reloadSections)
                     }
                     if let reloadRows = update.updatedRows {
-                        collectionView.reloadItems(at: reloadRows)
+                        let updatedItems = reloadRows.map{ IndexPath(item: $0.item, section: $0.section) }
+                        collectionView.reloadItems(at: updatedItems)
                     }
                 }
             }

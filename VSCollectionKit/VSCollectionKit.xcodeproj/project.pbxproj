@@ -17,15 +17,17 @@
 		531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */; };
 		531DDD6E243C859D0096EC9D /* VSCollectionKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 531DDD60243C859D0096EC9D /* VSCollectionKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531DDD90243C87D50096EC9D /* VSSectionHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD88243C87D50096EC9D /* VSSectionHandlerProtocol.swift */; };
-		531DDD91243C87D50096EC9D /* VSCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD89243C87D50096EC9D /* VSCollectionViewData.swift */; };
 		531DDD92243C87D50096EC9D /* VSCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8A243C87D50096EC9D /* VSCollectionViewDelegate.swift */; };
-		531DDD93243C87D50096EC9D /* VSCollectionViewUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8B243C87D50096EC9D /* VSCollectionViewUpdate.swift */; };
 		531DDD94243C87D50096EC9D /* VSCollectionViewSectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8C243C87D50096EC9D /* VSCollectionViewSectionHandler.swift */; };
 		531DDD95243C87D50096EC9D /* VSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8D243C87D50096EC9D /* VSCollectionViewController.swift */; };
 		531DDD96243C87D50096EC9D /* VSCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8E243C87D50096EC9D /* VSCollectionViewDataSource.swift */; };
 		531DDD97243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */; };
 		53A1FED22449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */; };
 		53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */; };
+		53A9CADA255D83A700373F74 /* VSCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD89243C87D50096EC9D /* VSCollectionViewData.swift */; };
+		53A9CAE0255D83CA00373F74 /* libVSCollectionViewData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A9CACB255D839F00373F74 /* libVSCollectionViewData.a */; };
+		53A9CAED255D84F900373F74 /* VSCollectionViewUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8B243C87D50096EC9D /* VSCollectionViewUpdate.swift */; };
+		53A9CAF6255DA45100373F74 /* VSCollectionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */; };
 		53F85A9F244C6A22001451FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85A9E244C6A22001451FB /* AppDelegate.swift */; };
 		53F85AA1244C6A22001451FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85AA0244C6A22001451FB /* SceneDelegate.swift */; };
 		53F85AAA244C6A23001451FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F85AA9244C6A23001451FB /* Assets.xcassets */; };
@@ -54,6 +56,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		53A9CAC9255D839F00373F74 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5316E27B2444872300D30576 /* MockSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSectionModel.swift; sourceTree = "<group>"; };
 		5316E27D2444874300D30576 /* MockCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCellModel.swift; sourceTree = "<group>"; };
@@ -77,6 +91,7 @@
 		531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSCollectionViewLayoutProvider.swift; sourceTree = "<group>"; };
 		53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewSectionHandlerTests.swift; sourceTree = "<group>"; };
 		53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewLayoutProviderTests.swift; sourceTree = "<group>"; };
+		53A9CACB255D839F00373F74 /* libVSCollectionViewData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVSCollectionViewData.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F85A9C244C6A22001451FB /* CollectionKitTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionKitTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F85A9E244C6A22001451FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F85AA0244C6A22001451FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A9CAE0255D83CA00373F74 /* libVSCollectionViewData.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,10 +122,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		53A9CAC8255D839F00373F74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F85A99244C6A22001451FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A9CAF6255DA45100373F74 /* VSCollectionKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +146,9 @@
 				531DDD5F243C859D0096EC9D /* VSCollectionKit */,
 				531DDD6A243C859D0096EC9D /* VSCollectionKitTests */,
 				53F85A9D244C6A22001451FB /* CollectionKitTestApp */,
+				53A9CACC255D839F00373F74 /* VSCollectionViewData */,
 				531DDD5E243C859D0096EC9D /* Products */,
+				53A9CADF255D83CA00373F74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +158,7 @@
 				531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */,
 				531DDD66243C859D0096EC9D /* VSCollectionKitTests.xctest */,
 				53F85A9C244C6A22001451FB /* CollectionKitTestApp.app */,
+				53A9CACB255D839F00373F74 /* libVSCollectionViewData.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,15 +194,29 @@
 			isa = PBXGroup;
 			children = (
 				531DDD8D243C87D50096EC9D /* VSCollectionViewController.swift */,
-				531DDD89243C87D50096EC9D /* VSCollectionViewData.swift */,
 				531DDD8E243C87D50096EC9D /* VSCollectionViewDataSource.swift */,
 				531DDD8A243C87D50096EC9D /* VSCollectionViewDelegate.swift */,
 				531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */,
 				531DDD8C243C87D50096EC9D /* VSCollectionViewSectionHandler.swift */,
-				531DDD8B243C87D50096EC9D /* VSCollectionViewUpdate.swift */,
 				531DDD88243C87D50096EC9D /* VSSectionHandlerProtocol.swift */,
 			);
 			path = VSCollectionViewController;
+			sourceTree = "<group>";
+		};
+		53A9CACC255D839F00373F74 /* VSCollectionViewData */ = {
+			isa = PBXGroup;
+			children = (
+				531DDD89243C87D50096EC9D /* VSCollectionViewData.swift */,
+				531DDD8B243C87D50096EC9D /* VSCollectionViewUpdate.swift */,
+			);
+			path = VSCollectionViewData;
+			sourceTree = "<group>";
+		};
+		53A9CADF255D83CA00373F74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		53F85A9D244C6A22001451FB /* CollectionKitTestApp */ = {
@@ -245,6 +286,23 @@
 			productReference = 531DDD66243C859D0096EC9D /* VSCollectionKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		53A9CACA255D839F00373F74 /* VSCollectionViewData */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53A9CACF255D839F00373F74 /* Build configuration list for PBXNativeTarget "VSCollectionViewData" */;
+			buildPhases = (
+				53A9CAC7255D839F00373F74 /* Sources */,
+				53A9CAC8255D839F00373F74 /* Frameworks */,
+				53A9CAC9255D839F00373F74 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VSCollectionViewData;
+			productName = VSCollectionViewData;
+			productReference = 53A9CACB255D839F00373F74 /* libVSCollectionViewData.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		53F85A9B244C6A22001451FB /* CollectionKitTestApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F85AB1244C6A23001451FB /* Build configuration list for PBXNativeTarget "CollectionKitTestApp" */;
@@ -269,8 +327,8 @@
 		531DDD54243C859D0096EC9D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastSwiftUpdateCheck = 1210;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Vinodh Govindaswamy";
 				TargetAttributes = {
 					531DDD5C243C859D0096EC9D = {
@@ -279,6 +337,9 @@
 					};
 					531DDD65243C859D0096EC9D = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					53A9CACA255D839F00373F74 = {
+						CreatedOnToolsVersion = 12.1;
 					};
 					53F85A9B244C6A22001451FB = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -301,6 +362,7 @@
 				531DDD5C243C859D0096EC9D /* VSCollectionKit */,
 				531DDD65243C859D0096EC9D /* VSCollectionKitTests */,
 				53F85A9B244C6A22001451FB /* CollectionKitTestApp */,
+				53A9CACA255D839F00373F74 /* VSCollectionViewData */,
 			);
 		};
 /* End PBXProject section */
@@ -342,9 +404,7 @@
 				531DDD92243C87D50096EC9D /* VSCollectionViewDelegate.swift in Sources */,
 				531DDD90243C87D50096EC9D /* VSSectionHandlerProtocol.swift in Sources */,
 				531DDD94243C87D50096EC9D /* VSCollectionViewSectionHandler.swift in Sources */,
-				531DDD93243C87D50096EC9D /* VSCollectionViewUpdate.swift in Sources */,
 				531DDD95243C87D50096EC9D /* VSCollectionViewController.swift in Sources */,
-				531DDD91243C87D50096EC9D /* VSCollectionViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +421,15 @@
 				5316E28424449F6E00D30576 /* VSCollectionViewDelegateTests.swift in Sources */,
 				5316E27C2444872300D30576 /* MockSectionModel.swift in Sources */,
 				53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53A9CAC7255D839F00373F74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53A9CAED255D84F900373F74 /* VSCollectionViewUpdate.swift in Sources */,
+				53A9CADA255D83A700373F74 /* VSCollectionViewData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +499,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -493,6 +563,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -536,6 +607,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VSCollectionKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -562,6 +634,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VSCollectionKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,6 +681,34 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vswamy.vscollectionkit.VSCollectionKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		53A9CAD0255D839F00373F74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6XYPCYQXKC;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		53A9CAD1255D839F00373F74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6XYPCYQXKC;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -675,6 +776,15 @@
 			buildConfigurations = (
 				531DDD75243C859D0096EC9D /* Debug */,
 				531DDD76243C859D0096EC9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53A9CACF255D839F00373F74 /* Build configuration list for PBXNativeTarget "VSCollectionViewData" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53A9CAD0255D839F00373F74 /* Debug */,
+				53A9CAD1255D839F00373F74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
