@@ -9,13 +9,18 @@
 import UIKit
 import VSCollectionViewData
 
-public class VSCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+public protocol VSCollectionViewDataSourceAPI: UICollectionViewDataSource {
+    func apply(data: VSCollectionViewData,
+                      animated: Bool)
+}
+
+public class VSCollectionViewDataSource: NSObject, VSCollectionViewDataSourceAPI {
 
     unowned private var collectionView: UICollectionView
     private var data: VSCollectionViewData?
-    unowned private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var sectionHandler: VSCollectionViewSectionHandlerAPI
     public init(collectionView: UICollectionView,
-         sectionHandler: VSCollectionViewSectionHandller) {
+         sectionHandler: VSCollectionViewSectionHandlerAPI) {
         self.collectionView = collectionView
         self.sectionHandler = sectionHandler
         super.init()

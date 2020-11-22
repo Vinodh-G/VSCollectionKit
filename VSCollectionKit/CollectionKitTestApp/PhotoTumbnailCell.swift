@@ -36,6 +36,11 @@ class PhotoTumbnailCell: UICollectionViewCell {
         super.init(coder: coder)
         setUpView()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
 
     private func setUpView() {
         contentView.addSubview(imageView)

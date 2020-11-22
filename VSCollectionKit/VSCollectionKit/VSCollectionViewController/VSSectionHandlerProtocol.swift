@@ -9,28 +9,22 @@
 import UIKit
 import VSCollectionViewData
 
-public protocol SectionHandler: SectionLayoutInfo, SectionHeaderFooter, SectionDelegateHandler {
+public protocol SectionHandler: SectionLayoutInfo {
     var type: String { get }
     func registerCells(for collectionView: UICollectionView)
     func cellProvider(_ collectionView: UICollectionView,
                       _ indexPath: IndexPath,
                       _ cellModel: CellModel) -> UICollectionViewCell
+    
+    var sectionHeaderFooterProvider: SectionHeaderFooterProvider? { get }
+    var sectionDelegateHandler: SectionDelegateHandler? { get }
 }
 
-public protocol SectionHeaderFooter: AnyObject {
+public protocol SectionHeaderFooterProvider: AnyObject {
     func supplementaryViewProvider(_ collectionView: UICollectionView,
                                    _ kind: String,
                                    _ indexPath: IndexPath,
                                    _ headerViewModel: HeaderViewModel) -> UICollectionReusableView?
-}
-
-public extension SectionHeaderFooter {
-    func supplementaryViewProvider(_ collectionView: UICollectionView,
-                                   _ kind: String,
-                                   _ indexPath: IndexPath,
-                                   _ headerViewModel: HeaderViewModel) -> UICollectionReusableView? {
-        return nil
-    }
 }
 
 public protocol SectionLayoutInfo: AnyObject {
@@ -46,14 +40,4 @@ public protocol SectionDelegateHandler: AnyObject {
                          _ indexPath: IndexPath,
                          _ cell: UICollectionViewCell,
                          _ cellModel: CellModel)
-}
-
-public extension SectionDelegateHandler {
-    func didSelect(_ collectionView: UICollectionView,
-                   _ indexPath: IndexPath,
-                   _ cellModel: CellModel) {}
-    func willDisplayCell(_ collectionView: UICollectionView,
-                          _ indexPath: IndexPath,
-                          _ cell: UICollectionViewCell,
-                          _ cellModel: CellModel) {}
 }

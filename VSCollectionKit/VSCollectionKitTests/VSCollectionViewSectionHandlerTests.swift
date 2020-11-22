@@ -52,6 +52,53 @@ class VSCollectionViewSectionHandlerTests: XCTestCase {
         XCTAssertNotNil(layoutInfo)
     }
 
+    
+    func testDelegateHandlerVerifyDidSelectCell() {
+        
+        let delegateHandler = MockDelegateHandler()
+        let mockSectionHandler = MockSectionHandler(delegateHadler: delegateHandler)
+        let sectionHandler = VSCollectionViewSectionHandller()
+        sectionHandler.addSectionHandler(handler: mockSectionHandler)
+        
+        let expectation = XCTestExpectation(description: "Expect Did Select")
+        
+        delegateHandler.didSelectBlock = { (collectionView, indexPath, cellModel) in
+            expectation.fulfill()
+        }
+        
+        
+        sectionHandler.didSelectItemAt(collectionView,
+                                       indexPath: IndexPath(item: 0,
+                                                            section: 0),
+                                       sectionModel: MockSectionModel(sectionType: "MockSection",
+                                                                      sectionName: "Mock Seciton Name"))
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testDelegateHandlerVerifyWillDisplayCell() {
+        
+        let delegateHandler = MockDelegateHandler()
+        let mockSectionHandler = MockSectionHandler(delegateHadler: delegateHandler)
+        let sectionHandler = VSCollectionViewSectionHandller()
+        sectionHandler.addSectionHandler(handler: mockSectionHandler)
+        
+        let expectation = XCTestExpectation(description: "Expect Did Select")
+        
+        delegateHandler.willDisplayBlock = { (collectionView, indexPath, sectionModel, cellModel) in
+            expectation.fulfill()
+        }
+        
+        sectionHandler.willDisplayCell(collectionView: collectionView,
+                                       indexPath: IndexPath(item: 0,
+                                                            section: 0),
+                                       cell: UICollectionViewCell(),
+                                       sectionModel: MockSectionModel(sectionType: "MockSection",
+                                                                      sectionName: "Mock Seciton Name"))
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
     func vsSectionHandler() -> VSCollectionViewSectionHandller {
         let sectionHandler = VSCollectionViewSectionHandller()
         sectionHandler.addSectionHandler(handler: mockSectionHandler)

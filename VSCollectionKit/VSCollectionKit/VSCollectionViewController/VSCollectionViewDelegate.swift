@@ -9,26 +9,24 @@
 import UIKit
 import VSCollectionViewData
 
-public class VSCollectionViewDelegate: NSObject, UICollectionViewDelegate {
+public protocol VSCollectionViewDelegateAPI: UICollectionViewDelegate {
+    var data: VSCollectionViewData? { get set }
+}
+
+public class VSCollectionViewDelegate: NSObject, VSCollectionViewDelegateAPI {
 
     unowned private var collectionView: UICollectionView
     public var data: VSCollectionViewData?
-    unowned private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var sectionHandler: VSCollectionViewSectionDelegateHandlerAPI
 
     public init(collectionView: UICollectionView,
-         sectionHandler: VSCollectionViewSectionHandller) {
+         sectionHandler: VSCollectionViewSectionDelegateHandlerAPI) {
         self.collectionView = collectionView
         self.sectionHandler = sectionHandler
         super.init()
         collectionView.delegate = self
-
-        // TODO: Have to remove this
-        collectionView.register(UICollectionReusableView.self,
-                                forSupplementaryViewOfKind: "section-header-element-kind",
-                                withReuseIdentifier: "EmptyView")
-        sectionHandler.registerCells(for:  collectionView)
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView,
                                willDisplay cell: UICollectionViewCell,
                                forItemAt indexPath: IndexPath) {

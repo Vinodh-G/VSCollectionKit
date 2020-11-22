@@ -16,7 +16,8 @@ class VSCollectionViewDataSourceTests: XCTestCase {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let sectionHandler = VSCollectionViewSectionHandller()
     override func setUp() {
-        sectionHandler.addSectionHandler(handler: MockSectionHandler())
+        sectionHandler.addSectionHandler(handler: MockSectionHandler(delegateHadler: nil,
+                                                                     headerFooterProvider: MockerHeaderFooterProvider()))
     }
 
     override func tearDown() {

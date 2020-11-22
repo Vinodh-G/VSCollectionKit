@@ -11,6 +11,10 @@ import VSCollectionKit
 import VSCollectionViewData
 
 class PhotosSectionHandler: SectionHandler {
+    
+    var sectionHeaderFooterProvider: SectionHeaderFooterProvider? = nil
+    var sectionDelegateHandler: SectionDelegateHandler? = nil
+    
     var type: String {
         return AlbumSectionType.photos.rawValue
     }

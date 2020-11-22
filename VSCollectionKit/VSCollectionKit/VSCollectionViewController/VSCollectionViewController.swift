@@ -13,10 +13,10 @@ open class VSCollectionViewController: UIViewController {
 
     public var collectionView: UICollectionView!
     public var collectionViewLayout: UICollectionViewLayout!
-    public var dataProvider: VSCollectionViewDataSource!
-    public var delegateHandler: VSCollectionViewDelegate!
-    public var layoutProvider: VSCollectionViewLayoutProvider!
-    public var sectionHandler: VSCollectionViewSectionHandller = VSCollectionViewSectionHandller()
+    public var dataProvider: VSCollectionViewDataSourceAPI!
+    public var delegateHandler: VSCollectionViewDelegateAPI!
+    public var layoutProvider: VSCollectionViewLayoutProviderAPI!
+    public var sectionHandler: VSCollectionViewSectionHandlerAPI = VSCollectionViewSectionHandller()
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +35,17 @@ open class VSCollectionViewController: UIViewController {
     }
 
     open func configureDelegate() {
+        guard let sectionDelegateHandler = sectionHandler as? VSCollectionViewSectionDelegateHandlerAPI else { return }
         delegateHandler = VSCollectionViewDelegate(collectionView: collectionView,
-                                                   sectionHandler: sectionHandler)
+                                                   sectionHandler: sectionDelegateHandler)
     }
 
     open func configureLayoutProvider() {
+        guard let sectionLayoutHandler = sectionHandler as? VSCollectionViewSectionLayoutHandlerAPI else {
+            fatalError("Layout Provider not configured, without which the collection will not be able to render the cells")
+        }
         layoutProvider = VSCollectionViewLayoutProvider(collectionView: collectionView,
-                                                        sectionHandler: sectionHandler)
+                                                        sectionHandler: sectionLayoutHandler)
     }
 
     open func apply(collectionData: VSCollectionViewData, animated: Bool) {

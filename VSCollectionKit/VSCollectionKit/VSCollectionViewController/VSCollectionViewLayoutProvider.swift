@@ -9,14 +9,20 @@
 import UIKit
 import VSCollectionViewData
 
-public class VSCollectionViewLayoutProvider {
+public protocol VSCollectionViewLayoutProviderAPI {
+    var data: VSCollectionViewData? { get set }
+    func collectionLayout(for sectionIndex: Int,
+                                 environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+}
+
+public class VSCollectionViewLayoutProvider: VSCollectionViewLayoutProviderAPI {
 
     unowned private var collectionView: UICollectionView
-    unowned private var sectionHandler: VSCollectionViewSectionHandller
+    unowned private var sectionHandler: VSCollectionViewSectionLayoutHandlerAPI
     public var data: VSCollectionViewData?
 
     public init(collectionView: UICollectionView,
-                sectionHandler: VSCollectionViewSectionHandller) {
+                sectionHandler: VSCollectionViewSectionLayoutHandlerAPI) {
         self.collectionView = collectionView
         self.sectionHandler = sectionHandler
     }

@@ -9,7 +9,21 @@
 import UIKit
 import VSCollectionViewData
 
-public class VSCollectionViewSectionHandller {
+public protocol VSCollectionViewSectionHandlerAPI: class {
+    func addSectionHandler(handler: SectionHandler)
+    func removeSectionHandler(type: String)
+    func registerCells(for collectionView: UICollectionView)
+    func numOfRows(for sectionModel: SectionModel, sectionIndex: Int) -> Int
+    func cell(for collectionView: UICollectionView,
+              indexPath: IndexPath,
+              sectionModel: SectionModel) -> UICollectionViewCell
+    func supplementaryView(collectionView: UICollectionView,
+                           kind: String,
+                           indexPath: IndexPath,
+                           sectionModel: SectionModel) -> UICollectionReusableView?
+}
+
+public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI {
 
     public init() {}
 
@@ -46,22 +60,28 @@ public class VSCollectionViewSectionHandller {
                                            sectionModel.items[indexPath.row])
     }
 
-    func supplementaryView(collectionView: UICollectionView,
+    public func supplementaryView(collectionView: UICollectionView,
                            kind: String,
                            indexPath: IndexPath,
                            sectionModel: SectionModel) -> UICollectionReusableView? {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType],
             let headerViewModel = sectionModel.header else { return nil }
 
-        return sectionHandler.supplementaryViewProvider(collectionView,
+        return sectionHandler.sectionHeaderFooterProvider?.supplementaryViewProvider(collectionView,
                                                         kind,
                                                         indexPath,
                                                         headerViewModel)
     }
 }
 
-extension VSCollectionViewSectionHandller {
+public protocol VSCollectionViewSectionLayoutHandlerAPI: class {
     func collectionLayout(for sectionModel: SectionModel,
+                          environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+}
+
+extension VSCollectionViewSectionHandller: VSCollectionViewSectionLayoutHandlerAPI {
+    
+    public func collectionLayout(for sectionModel: SectionModel,
                           environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return nil }
         return sectionHandler.sectionLayoutProvider(sectionModel,
@@ -69,24 +89,34 @@ extension VSCollectionViewSectionHandller {
     }
 }
 
-extension VSCollectionViewSectionHandller {
-
+public protocol VSCollectionViewSectionDelegateHandlerAPI: class {
     func willDisplayCell(collectionView: UICollectionView,
+                         indexPath: IndexPath,
+                         cell: UICollectionViewCell,
+                         sectionModel: SectionModel)
+    func didSelectItemAt(_ collectionView: UICollectionView,
+                        indexPath: IndexPath,
+                        sectionModel: SectionModel)
+}
+
+extension VSCollectionViewSectionHandller: VSCollectionViewSectionDelegateHandlerAPI {
+
+    public func willDisplayCell(collectionView: UICollectionView,
                          indexPath: IndexPath,
                          cell: UICollectionViewCell,
                          sectionModel: SectionModel) {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return }
-        sectionHandler.willDisplayCell(collectionView,
+        sectionHandler.sectionDelegateHandler?.willDisplayCell(collectionView,
                                        indexPath,
                                        cell,
                                        sectionModel.items[indexPath.row])
     }
 
-    func didSelectItemAt(_ collectionView: UICollectionView,
+    public func didSelectItemAt(_ collectionView: UICollectionView,
                         indexPath: IndexPath,
                         sectionModel: SectionModel) {
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return }
-        sectionHandler.didSelect(collectionView,
+        sectionHandler.sectionDelegateHandler?.didSelect(collectionView,
                                  indexPath,
                                  sectionModel.items[indexPath.row])
     }
