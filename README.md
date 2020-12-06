@@ -33,7 +33,24 @@ Though the component names justify their functionality, a brief description for 
 **VSCollectionViewData** is a struct that mostly contains the details about our data to be displayed on CollectionView. It contains an array of sections confirming to SectionModel protocol. Also, updates array containing details about the changes in data which is getting applied to a collection via VSCollectionViewDataSource.
 
 The SectionModel, CellModel and HeaderViewModel protocols looks somthing like below
-![](Images/SectionModelPototcol.png)
+
+```
+public protocol SectionModel {
+    var sectionType: String { get }
+    var sectionID: String { get }
+    var header: HeaderViewModel? { get }
+    var items: [CellModel] { get set }
+}
+
+public protocol HeaderViewModel {
+    var headerType: String { get }
+}
+
+public protocol CellModel {
+    var cellType: String { get }
+    var cellID: String { get }
+}
+```
 
 **VSCollectionViewDelegate** is subclass of NSObject confirming to UICollectionViewDelegate. This class mainly involves handling delegate events of collectionView. Please note that we are not using this delegate for determining the size of cell or supplementary view.
 
@@ -50,7 +67,40 @@ That's the theoretical view VSCollectionKit and its components!!!!
 **VSCollectionViewSectionHandller** VSCollectionViewSectionHandller handles adding and removing of SectionHandler for the VSCollectionViewController. We can have n number of sections supported by collectionview via VSCollectionViewSectionHandller's addSectionHandler(handler: SectionHandler) function.
 
 The protocol declaration of SectionHandler is as below.
-![](/Images/SectionHandlerProtocol.png)
+```
+public protocol SectionHandler: SectionLayoutInfo {
+    var type: String { get }
+    func registerCells(for collectionView: UICollectionView)
+    func cellProvider(_ collectionView: UICollectionView,
+                      _ indexPath: IndexPath,
+                      _ cellModel: CellModel) -> UICollectionViewCell
+    
+    var sectionHeaderFooterProvider: SectionHeaderFooterProvider? { get }
+    var sectionDelegateHandler: SectionDelegateHandler? { get }
+}
+
+public protocol SectionHeaderFooterProvider: AnyObject {
+    func supplementaryViewProvider(_ collectionView: UICollectionView,
+                                   _ kind: String,
+                                   _ indexPath: IndexPath,
+                                   _ headerViewModel: HeaderViewModel) -> UICollectionReusableView?
+}
+
+public protocol SectionLayoutInfo: AnyObject {
+    func sectionLayoutProvider(_ sectionModel: SectionModel,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+}
+
+public protocol SectionDelegateHandler: AnyObject {
+    func didSelect(_ collectionView: UICollectionView,
+                   _ indexPath: IndexPath,
+                   _ cellModel: CellModel)
+    func willDisplayCell(_ collectionView: UICollectionView,
+                         _ indexPath: IndexPath,
+                         _ cell: UICollectionViewCell,
+                         _ cellModel: CellModel)
+}
+```
 
 Probably you caught them right!! Yes the collectionview related functions falls in the individual SectionHandler.It seems to be less complexed because it contains only the necessary functions to be implemented, if we still need more we can always go and extent it from components like VSCollectionViewDataSource and VSCollectionViewDelegate.
 
@@ -59,16 +109,90 @@ Probably you caught them right!! Yes the collectionview related functions falls 
 As you know, the VSCollectionViewController understands data by VSCollectionData, so our example is quite simple showing list of photos in CollectionView. We would be converting the list of image urls to VSCollectionData's SectionModel and CellModel.
 
 A quick snippet of what i was talking about.
-![](/Images/AlbumSectionmodel.png)
+```
+struct AlbumSectionModel: SectionModel {
+    var sectionType: String {
+        return AlbumSectionType.photos.rawValue
+    }
+
+    var sectionID: String
+    var header: HeaderViewModel?
+    var items: [CellModel] = []
+
+    init(photoUrls: [String]) {
+        self.sectionID = ProcessInfo.processInfo.globallyUniqueString
+        photoUrls.forEach { (url) in
+            items.append(PhotoCellModel(photoUrl: url))
+        }
+    }
+}
+
+struct PhotoCellModel: CellModel {
+    var cellType: String {
+        return AlbumCellType.photos.rawValue
+    }
+
+    let cellID: String
+    let imageUrl: String
+    init(photoUrl: String) {
+        cellID = UUID().uuidString
+        imageUrl = photoUrl
+    }
+
+    var photoURL: String {
+        return "PhotoData/\(imageUrl)"
+    }
+}
+
+```
 
 Having a thought on how we are providing the cell and layout information? Let's think it together! We need to create a class confirming to protocol SectionHandler, which is where we would be implementing the necessary functions to supply the cell and layout information to the collection view.
+```
+    func cellProvider(_ collectionView: UICollectionView,
+                      _ indexPath: IndexPath,
+                      _ cellModel: CellModel) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoTumbnailCell.resuseId,
+                                                            for: indexPath) as? PhotoTumbnailCell,
+            let photoCellModel = cellModel as? PhotoCellModel else {
+                                                                return UICollectionViewCell()
+        }
 
-![](/Images/AlbumsSectionHandlers.png)
+        cell.cellModel = photoCellModel
+        return cell
+    }
+
+    func sectionLayoutProvider(_ sectionModel: SectionModel,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+
+
+        let groupLayout = NSCollectionLayoutGroup.vertical(layoutSize: LayoutSizeInfo.mainGroupLayoutSize,
+                                                           subitems: [fullWidthLayout(),
+                                                                      bigItemWithTwoVerticalPair(),
+                                                                      tripletLayout()])
+        let sectionLayout = NSCollectionLayoutSection(group: groupLayout)
+        return sectionLayout
+    }
+```
 
 The final touch of how are we applying the data to collectionView shown below.
-![](/Images/QuickSnipet_Howtoapplycollectiondat.png)
-So we need to override func willAddSectionControllers() and add all the sectionHandlers which we would be using in our collectionView, provided each sectionControllers should confirm to protocol SectionHandler as shown above.
+```
+    override func willAddSectionControllers() {
+        super.willAddSectionControllers()
+        let photSectionHandler = PhotosSectionHandler()
+        sectionHandler.addSectionHandler(handler: photSectionHandler)
+    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "10 Mar 2020"
+        viewModel?.fetchPhotos(callBack: { [weak self] (collectionData, errorString) in
+            guard let self = self,
+                let collectionData = collectionData else { return }
+            self.apply(collectionData: collectionData, animated: true)
+        })
+    }
+```
+So we need to override func willAddSectionControllers() and add all the sectionHandlers which we would be using in our collectionView, provided each sectionControllers should confirm to protocol SectionHandler as shown above.
 
 
 ### How to Use VSCollectionKit in project
