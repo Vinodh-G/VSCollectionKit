@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import VSCollectionViewData
 
 public protocol SectionHandler: SectionLayoutInfo {
     var type: String { get }

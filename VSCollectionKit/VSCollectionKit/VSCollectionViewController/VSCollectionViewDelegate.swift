@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import VSCollectionViewData
 
 public protocol VSCollectionViewDelegateAPI: UICollectionViewDelegate {
     var data: VSCollectionViewData? { get set }
@@ -31,17 +30,19 @@ public class VSCollectionViewDelegate: NSObject, VSCollectionViewDelegateAPI {
                                willDisplay cell: UICollectionViewCell,
                                forItemAt indexPath: IndexPath) {
         guard let collectionData = data else { return }
+        let sectionModel = collectionData.sectionIdentifiers[indexPath.section].sectionModel
         sectionHandler.willDisplayCell(collectionView: collectionView,
                                        indexPath: indexPath,
                                        cell: cell,
-                                       sectionModel: collectionData.sections[indexPath.section])
+                                       sectionModel: sectionModel)
     }
 
     public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
         guard let collectionData = data else { return }
+        let sectionModel = collectionData.sectionIdentifiers[indexPath.section].sectionModel
         sectionHandler.didSelectItemAt(collectionView,
                                        indexPath: indexPath,
-                                       sectionModel: collectionData.sections[indexPath.section])
+                                       sectionModel: sectionModel)
     }
 }

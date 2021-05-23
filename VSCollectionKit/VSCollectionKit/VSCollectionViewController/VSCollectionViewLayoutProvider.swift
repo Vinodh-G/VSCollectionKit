@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import VSCollectionViewData
 
 public protocol VSCollectionViewLayoutProviderAPI {
     var data: VSCollectionViewData? { get set }
@@ -29,7 +28,7 @@ public class VSCollectionViewLayoutProvider: VSCollectionViewLayoutProviderAPI {
 
     public func collectionLayout(for sectionIndex: Int,
                                  environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
-        guard let sectionModel = data?.sections[sectionIndex] else { return nil }
+        guard let sectionModel = data?.sectionIdentifiers[sectionIndex].sectionModel else { return nil }
         return sectionHandler.collectionLayout(for: sectionModel,
                                                environment: environment)
     }

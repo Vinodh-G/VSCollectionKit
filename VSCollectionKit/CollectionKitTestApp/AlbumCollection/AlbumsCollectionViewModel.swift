@@ -6,7 +6,6 @@
 //  Copyright © 2020 Vinodh Govindaswamy. All rights reserved.
 //
 
-import Foundation
 import VSCollectionKit
 
 protocol AlbumCollectionViewAPI {
@@ -29,42 +28,39 @@ class AlbumCollectionViewModel: AlbumCollectionViewAPI {
     func fetchPhotos(callBack: @escaping CallBack) {
         guard let urls = interactor.fetchAlbumUrls() else { return }
         var collectionData = VSCollectionViewData()
-        let sectionSnap = SectionSnapshot(sectionModel: AlbumSectionModel(photoUrls: urls))
-        collectionData.appendSections([sectionSnap])
-        collectionData.appendItems(sectionSnap.cellSnapshots, toSection: sectionSnap)
+        let section = AlbumSectionModel(photoUrls: urls)
+        collectionData.add(section: section)
         collectionViewData = collectionData
         callBack(collectionData, nil)
     }
 }
 
 struct AlbumSectionModel: SectionModel {
-    
-    var sectionId: String
-    var cellItems: [CellModel] = []
-    var header: HeaderViewModel?
-    
     var sectionType: String {
         return AlbumSectionType.photos.rawValue
     }
 
+    var sectionID: String
+    var header: HeaderViewModel?
+    var items: [CellModel] = []
+
     init(photoUrls: [String]) {
-        self.sectionId = ProcessInfo.processInfo.globallyUniqueString
+        self.sectionID = UUID().uuidString
         photoUrls.forEach { (url) in
-            cellItems.append(PhotoCellModel(photoUrl: url))
+            items.append(PhotoCellModel(photoUrl: url))
         }
     }
 }
 
 struct PhotoCellModel: CellModel {
-    var cellId: String
-    
     var cellType: String {
         return AlbumCellType.photos.rawValue
     }
 
+    let cellID: String
     let imageUrl: String
     init(photoUrl: String) {
-        cellId = UUID().uuidString
+        cellID = UUID().uuidString
         imageUrl = photoUrl
     }
 
@@ -73,15 +69,10 @@ struct PhotoCellModel: CellModel {
     }
 }
 
-struct AlbumsInteractor {
-    
-    let fileManager: FileManager
-    init(fileManager: FileManager = FileManager.default) {
-        self.fileManager = fileManager
-    }
-    
+class AlbumsInteractor {
     func fetchAlbumUrls() -> [String]? {
 
+        let fileManager = FileManager.default
         guard let contents = try? fileManager.contentsOfDirectory(atPath: "\(Bundle.main.bundlePath)/PhotoData") else { return nil }
         return contents
     }

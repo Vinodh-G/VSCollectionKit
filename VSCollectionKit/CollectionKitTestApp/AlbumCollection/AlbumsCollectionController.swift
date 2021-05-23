@@ -22,7 +22,9 @@ class AlbumsCollectionController: VSCollectionViewController {
 
     override func willAddSectionControllers() {
         super.willAddSectionControllers()
-        let photSectionHandler = PhotosSectionHandler()
+        let photSectionHandler = PhotosSectionHandler(transitionCordinator: TransitionCordinator())
+        photSectionHandler.viewModel = viewModel
+        photSectionHandler.parentController = parent
         sectionHandler.addSectionHandler(handler: photSectionHandler)
     }
 
@@ -32,7 +34,7 @@ class AlbumsCollectionController: VSCollectionViewController {
         viewModel?.fetchPhotos(callBack: { [weak self] (collectionData, errorString) in
             guard let self = self,
                 let collectionData = collectionData else { return }
-            self.apply(collectionData: collectionData)
+            self.apply(collectionData: collectionData, animated: true)
         })
     }
 }

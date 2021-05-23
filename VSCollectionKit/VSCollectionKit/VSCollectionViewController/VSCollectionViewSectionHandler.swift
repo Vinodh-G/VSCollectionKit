@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import VSCollectionViewData
 
-public protocol VSCollectionViewSectionHandlerAPI: class {
+public protocol VSCollectionViewSectionHandlerAPI: AnyObject {
     func addSectionHandler(handler: SectionHandler)
     func removeSectionHandler(type: String)
     func registerCells(for collectionView: UICollectionView)
     func numOfRows(for sectionModel: SectionModel, sectionIndex: Int) -> Int
+    
     func cell(for collectionView: UICollectionView,
               indexPath: IndexPath,
               sectionModel: SectionModel) -> UICollectionViewCell
@@ -24,7 +24,7 @@ public protocol VSCollectionViewSectionHandlerAPI: class {
 }
 
 public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI {
-
+        
     public init() {}
 
     private var sectionHandlers: [String: SectionHandler] = [:]
@@ -45,9 +45,9 @@ public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI 
     }
 
     public func numOfRows(for sectionModel: SectionModel, sectionIndex: Int) -> Int {
-        return sectionModel.items.count
+        return sectionModel.cellItems.count
     }
-
+    
     public func cell(for collectionView: UICollectionView,
               indexPath: IndexPath,
               sectionModel: SectionModel) -> UICollectionViewCell {
@@ -57,7 +57,7 @@ public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI 
         guard let sectionHandler = sectionHandlers[sectionType] else { return emptyCell }
         return sectionHandler.cellProvider(collectionView,
                                            indexPath,
-                                           sectionModel.items[indexPath.row])
+                                           sectionModel.cellItems[indexPath.row])
     }
 
     public func supplementaryView(collectionView: UICollectionView,
@@ -74,7 +74,7 @@ public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI 
     }
 }
 
-public protocol VSCollectionViewSectionLayoutHandlerAPI: class {
+public protocol VSCollectionViewSectionLayoutHandlerAPI: AnyObject {
     func collectionLayout(for sectionModel: SectionModel,
                           environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
 }
@@ -89,7 +89,7 @@ extension VSCollectionViewSectionHandller: VSCollectionViewSectionLayoutHandlerA
     }
 }
 
-public protocol VSCollectionViewSectionDelegateHandlerAPI: class {
+public protocol VSCollectionViewSectionDelegateHandlerAPI: AnyObject {
     func willDisplayCell(collectionView: UICollectionView,
                          indexPath: IndexPath,
                          cell: UICollectionViewCell,
@@ -109,7 +109,7 @@ extension VSCollectionViewSectionHandller: VSCollectionViewSectionDelegateHandle
         sectionHandler.sectionDelegateHandler?.willDisplayCell(collectionView,
                                        indexPath,
                                        cell,
-                                       sectionModel.items[indexPath.row])
+                                       sectionModel.cellItems[indexPath.row])
     }
 
     public func didSelectItemAt(_ collectionView: UICollectionView,
@@ -118,6 +118,6 @@ extension VSCollectionViewSectionHandller: VSCollectionViewSectionDelegateHandle
         guard let sectionHandler = sectionHandlers[sectionModel.sectionType] else { return }
         sectionHandler.sectionDelegateHandler?.didSelect(collectionView,
                                  indexPath,
-                                 sectionModel.items[indexPath.row])
+                                 sectionModel.cellItems[indexPath.row])
     }
 }

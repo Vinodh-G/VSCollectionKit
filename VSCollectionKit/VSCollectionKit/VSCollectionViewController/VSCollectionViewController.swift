@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import VSCollectionViewData
 
 open class VSCollectionViewController: UIViewController {
 
@@ -25,6 +24,8 @@ open class VSCollectionViewController: UIViewController {
         configureLayoutProvider()
         configureDataSource()
         configureDelegate()
+        
+        sectionHandler.registerCells(for: collectionView)
     }
 
     open func willAddSectionControllers() { }
@@ -48,10 +49,11 @@ open class VSCollectionViewController: UIViewController {
                                                         sectionHandler: sectionLayoutHandler)
     }
 
-    open func apply(collectionData: VSCollectionViewData, animated: Bool) {
+    open func apply(collectionData: VSCollectionViewData) {
         delegateHandler.data = collectionData
         layoutProvider.data = collectionData
-        dataProvider.apply(data: collectionData, animated: animated)
+
+        dataProvider.apply(collectionData)
     }
 
     open func configureCollectionView() {

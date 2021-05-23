@@ -8,21 +8,26 @@
 
 import UIKit
 import VSCollectionKit
-//import VSCollectionViewData
 
 class PhotosSectionHandler: SectionHandler {
-    
-    var sectionHeaderFooterProvider: SectionHeaderFooterProvider? = nil
-    var sectionDelegateHandler: SectionDelegateHandler? = nil
-    
+
+    var viewModel: AlbumCollectionViewAPI?
+    var parentController: UIViewController?
     var type: String {
         return AlbumSectionType.photos.rawValue
+    }
+
+    private var selectedCell: PhotoTumbnailCell?
+    private var transitionCordinator: TransitionCordinator
+    init(transitionCordinator: TransitionCordinator) {
+        self.transitionCordinator = transitionCordinator
+        self.transitionCordinator.fromDelegate = self
     }
 
     func registerCells(for collectionView: UICollectionView) {
         collectionView.register(PhotoTumbnailCell.self, forCellWithReuseIdentifier: PhotoTumbnailCell.resuseId)
     }
-    
+
     func cellProvider(_ collectionView: UICollectionView,
                       _ indexPath: IndexPath,
                       _ cellModel: CellModel) -> UICollectionViewCell {
@@ -39,6 +44,7 @@ class PhotosSectionHandler: SectionHandler {
     func sectionLayoutProvider(_ sectionModel: SectionModel,
                                _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
 
+
         let groupLayout = NSCollectionLayoutGroup.vertical(layoutSize: LayoutSizeInfo.mainGroupLayoutSize,
                                                            subitems: [fullWidthLayout(),
                                                                       bigItemWithTwoVerticalPair(),
@@ -46,6 +52,82 @@ class PhotosSectionHandler: SectionHandler {
         let sectionLayout = NSCollectionLayoutSection(group: groupLayout)
         return sectionLayout
     }
+
+    func didSelect(_ collectionView: UICollectionView,
+                   _ indexPath: IndexPath,
+                   _ cellModel: CellModel) {
+
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoTumbnailCell,
+            let collectionData = viewModel?.collectionViewData,
+            let parentViewCont = parentController as? UINavigationController else { return }
+
+        selectedCell = cell
+        let viewModel = ImageCollectionViewModel(collectionData: collectionData,
+                                                 selectedIndex: indexPath.item)
+        let imageCollectionController = ImageCollectionViewController()
+        imageCollectionController.viewModel = viewModel
+        parentViewCont.delegate = transitionCordinator
+        parentViewCont.pushViewController(imageCollectionController, animated: true)
+    }
+}
+
+extension PhotosSectionHandler: ZoomAnimatorDelegate {
+
+    var transactionImage: UIImage? {
+        return selectedCell?.imageView.image
+    }
+
+    var sourceFrame: CGRect? {
+        return selectedCell?.imageView.convert( selectedCell?.imageView.frame ?? .zero,
+                                               to: parentController?.view)
+    }
+
+    var destinationFrame: CGRect? {
+        return selectedCell?.imageView.convert( selectedCell?.imageView.frame ?? .zero,
+                                               to: parentController?.view)
+    }
+
+    func willBeginTransaction() {
+        selectedCell?.imageView.isHidden =  true
+    }
+
+    func didEndTransaction() {
+        selectedCell?.imageView.isHidden =  false
+    }
+}
+
+// ------------------------------------------------------------------------------------ //
+//
+//            FullWidthLayoutItem
+//            ---------------------------------
+//            -                               -
+//            -                               -
+//            -               A               -
+//            -                               -
+//            -                               -
+//            ---------------------------------
+
+//            MainWithTwoPairItem
+//            ---------------------------------
+//            -                  -            -
+//            -                  -     B      -
+//            -                  -            -
+//            -         A        --------------
+//            -                  -            -
+//            -                  -      C     -
+//            -                  -            -
+//            ---------------------------------
+
+//            TripletItem
+//            ---------------------------------
+//            -         -          -          -
+//            -    A    -     B    -     C    -
+//            -         -          -          -
+//            ---------------------------------
+//
+// ------------------------------------------------------------------------------------ //
+
+extension PhotosSectionHandler {
 
     private func fullWidthLayout() -> NSCollectionLayoutItem {
 
@@ -83,37 +165,6 @@ class PhotosSectionHandler: SectionHandler {
         return groupLayout
     }
 }
-
-// ------------------------------------------------------------------------------------ //
-//
-//            FullWidthLayoutItem
-//            ---------------------------------
-//            -                               -
-//            -                               -
-//            -               A               -
-//            -                               -
-//            -                               -
-//            ---------------------------------
-
-//            MainWithTwoPairItem
-//            ---------------------------------
-//            -                  -            -
-//            -                  -     B      -
-//            -                  -            -
-//            -         A        --------------
-//            -                  -            -
-//            -                  -      C     -
-//            -                  -            -
-//            ---------------------------------
-
-//            TripletItem
-//            ---------------------------------
-//            -         -          -          -
-//            -    A    -     B    -     C    -
-//            -         -          -          -
-//            ---------------------------------
-//
-// ------------------------------------------------------------------------------------ //
 
 struct LayoutSizeInfo {
 
