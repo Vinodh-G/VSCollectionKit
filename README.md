@@ -201,7 +201,7 @@ So we need to override func willAddSectionControllers() and add all the sectionH
 
 Include the below line in the project cathrage file
 ```
-  git "https://github.com/Vinodh-G/VSCollectionKit.git" >= 0.3
+  git "https://github.com/Vinodh-G/VSCollectionKit.git" >= 1.2
 ```  
 and then call ``` carthage update ``` from the project folder where it is used.
 
