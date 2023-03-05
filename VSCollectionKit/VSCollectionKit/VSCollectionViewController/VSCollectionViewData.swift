@@ -12,50 +12,47 @@ public typealias VSCollectionViewData = NSDiffableDataSourceSnapshot<SectionSnap
 
 public struct SectionSnapshot: Hashable {
     public static func == (lhs: SectionSnapshot, rhs: SectionSnapshot) -> Bool {
-        lhs.sectionModel.sectionId == rhs.sectionModel.sectionId
+        lhs.viewData.sectionId == rhs.viewData.sectionId
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(sectionModel.sectionId)
+        hasher.combine(viewData.sectionId)
     }
     
-    public var sectionModel: SectionModel
-    public var cellSnapshots: [CellSnapshot] = []
+    public var viewData: SectionViewData
     
-    public init(sectionModel: SectionModel) {
-        self.sectionModel = sectionModel
-        self.cellSnapshots = sectionModel.cellItems.map{ return CellSnapshot(cellModel: $0) }
+    public init(viewData: SectionViewData) {
+        self.viewData = viewData
     }
 }
 
 public struct CellSnapshot: Hashable {
-    var cellModel: CellModel
+    var cellViewData: CellViewData
     
     public static func == (lhs: CellSnapshot, rhs: CellSnapshot) -> Bool {
-        lhs.cellModel.cellId == rhs.cellModel.cellId
+        lhs.cellViewData.cellId == rhs.cellViewData.cellId
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(cellModel.cellId)
+        hasher.combine(cellViewData.cellId)
     }
     
-    public init(cellModel: CellModel) {
-        self.cellModel = cellModel
+    public init(cellModel: CellViewData) {
+        self.cellViewData = cellModel
     }
 }
 
-public protocol SectionModel {
+public protocol SectionViewData {
     var sectionType: String { get }
     var sectionId: String { get }
-    var header: HeaderViewModel? { get }
-    var cellItems: [CellModel] { get set }
+    var header: SectionHeaderViewData? { get }
 }
 
-public protocol HeaderViewModel {
+public protocol SectionHeaderViewData {
     var headerType: String { get }
 }
 
-public protocol CellModel {
+public protocol CellViewData {
     var cellType: String { get }
     var cellId: String { get }
 }

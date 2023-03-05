@@ -9,34 +9,37 @@
 import UIKit
 
 public protocol SectionHandler: SectionLayoutInfo {
+    init(sectionType: String, sectionId: String)
     var type: String { get }
+    var sectionId: String { get }
     func registerCells(for collectionView: UICollectionView)
     func cellProvider(_ collectionView: UICollectionView,
                       _ indexPath: IndexPath,
-                      _ cellModel: CellModel) -> UICollectionViewCell
+                      _ cellViewData: CellViewData) -> UICollectionViewCell
     
     var sectionHeaderFooterProvider: SectionHeaderFooterProvider? { get }
-    var sectionDelegateHandler: SectionDelegateHandler? { get }
+    var sectionDelegateHandler: SectionDelegateHandler? { get set }
 }
 
 public protocol SectionHeaderFooterProvider: AnyObject {
+    func registeHeaderFooterView(for collectionView: UICollectionView)
     func supplementaryViewProvider(_ collectionView: UICollectionView,
                                    _ kind: String,
                                    _ indexPath: IndexPath,
-                                   _ headerViewModel: HeaderViewModel) -> UICollectionReusableView?
+                                   _ headerViewData: SectionHeaderViewData) -> UICollectionReusableView?
 }
 
 public protocol SectionLayoutInfo: AnyObject {
-    func sectionLayoutProvider(_ sectionModel: SectionModel,
+    func sectionLayoutProvider(_ sectionViewData: SectionViewData,
                                _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
 }
 
 public protocol SectionDelegateHandler: AnyObject {
     func didSelect(_ collectionView: UICollectionView,
                    _ indexPath: IndexPath,
-                   _ cellModel: CellModel)
+                   _ cellViewData: CellViewData)
     func willDisplayCell(_ collectionView: UICollectionView,
                          _ indexPath: IndexPath,
                          _ cell: UICollectionViewCell,
-                         _ cellModel: CellModel)
+                         _ cellViewData: CellViewData)
 }

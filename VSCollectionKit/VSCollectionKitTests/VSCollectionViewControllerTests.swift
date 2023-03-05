@@ -11,15 +11,51 @@ import XCTest
 
 class VSCollectionViewControllerTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testSectionHandlerTypes() {
+        let viewController = CollectionViewController()
+        viewController.viewDidLoad()
+        XCTAssertNotNil(viewController.sectionHandlerTypes)
     }
+    
+    func testLayoutProvider() {
+        let viewController = CollectionViewController()
+        viewController.viewDidLoad()
+        XCTAssertNotNil(viewController.layoutProvider)
+        XCTAssertTrue(viewController.layoutProvider is VSCollectionViewLayoutProvider)
+    }
+    
+    func testDataProvider() {
+        let viewController = CollectionViewController()
+        viewController.viewDidLoad()
+        XCTAssertNotNil(viewController.dataProvider)
+        XCTAssertTrue(viewController.dataProvider is VSCollectionViewDataSource)
+    }
+    
+    func testDelegateHandler() {
+        let viewController = CollectionViewController()
+        viewController.viewDidLoad()
+        XCTAssertNotNil(viewController.delegateHandler)
+        XCTAssertTrue(viewController.delegateHandler is VSCollectionViewDelegate)
+    }
+}
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+class CollectionViewController: VSCollectionViewController {
+    override var sectionHandlerTypes: [String: SectionHandler.Type] {
+        return [MockSectionType.mockSection1.rawValue: MockSectionHandler.self]
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.register(MockCollectionViewCell.self,
+                                forCellWithReuseIdentifier: "CellId")
+        dataProvider = MockCollectionViewDataSource(collectionView: collectionView,
+                                                    cellProvider: { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellId",
+                                                      for: indexPath)
+        })
+    }
+}
 
-    func testExample() throws {
-        
-    }
+class MockCollectionViewDataSource: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot>, VSCollectionViewDataSourceAPI {
+    
 }

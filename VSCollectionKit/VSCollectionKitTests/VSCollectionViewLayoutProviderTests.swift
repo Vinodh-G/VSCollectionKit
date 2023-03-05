@@ -9,7 +9,6 @@
 import XCTest
 import UIKit
 @testable import VSCollectionKit
-@testable import VSCollectionViewData
 
 class VSCollectionViewLayoutProviderTests: XCTestCase {
 
@@ -17,26 +16,32 @@ class VSCollectionViewLayoutProviderTests: XCTestCase {
     let sectionHandler = VSCollectionViewSectionHandller()
 
     override func setUp() {
-        sectionHandler.addSectionHandler(handler: MockSectionHandler())
 
-        let collectionViewLayout = UICollectionViewCompositionalLayout { (section, enivronment) -> NSCollectionLayoutSection? in
-            return self.sectionHandler.collectionLayout(for: MockSectionModel(sectionType: "MockSection",
-            sectionName: "Mock Seciton Name"),
-                                                            environment: MockLayoutEnvironment())
+        let collectionLayout = UICollectionViewCompositionalLayout { section, environment in
+            
+            return self.sectionHandler.collectionLayout(for: self.mockCollectionViewData(),
+                                                        section: section,
+                                                        environment: environment)
+            
         }
 
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+        sectionHandler.registerSectionHandlers(types: [MockSectionType.mockSection1.rawValue: MockSectionHandler.self],
+                                               collectionView: collectionView)
+
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
+    func testCollectionLayoutInfo() {
         let layoutProvider = VSCollectionViewLayoutProvider(collectionView: collectionView,
                                                             sectionHandler: sectionHandler)
         layoutProvider.data = mockCollectionViewData()
-        XCTAssertNotNil(layoutProvider.collectionLayout(for: 0,
-                                                        environment: MockLayoutEnvironment()))
+        let layOutInfo = layoutProvider.collectionLayout(for: 0,
+                                                         collectionViewData: mockCollectionViewData(),
+                                                         environment: MockLayoutEnvironment())
+        XCTAssertNotNil(layOutInfo)
     }
 }

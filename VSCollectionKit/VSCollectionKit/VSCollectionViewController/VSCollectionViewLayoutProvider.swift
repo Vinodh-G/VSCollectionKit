@@ -9,16 +9,17 @@
 import UIKit
 
 public protocol VSCollectionViewLayoutProviderAPI {
-    var data: VSCollectionViewData? { get set }
+    var data: VSCollectionViewData { get set }
     func collectionLayout(for sectionIndex: Int,
-                                 environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+                          collectionViewData: VSCollectionViewData,
+                          environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
 }
 
 public class VSCollectionViewLayoutProvider: VSCollectionViewLayoutProviderAPI {
 
     unowned private var collectionView: UICollectionView
     unowned private var sectionHandler: VSCollectionViewSectionLayoutHandlerAPI
-    public var data: VSCollectionViewData?
+    public var data: VSCollectionViewData = VSCollectionViewData()
 
     public init(collectionView: UICollectionView,
                 sectionHandler: VSCollectionViewSectionLayoutHandlerAPI) {
@@ -27,9 +28,11 @@ public class VSCollectionViewLayoutProvider: VSCollectionViewLayoutProviderAPI {
     }
 
     public func collectionLayout(for sectionIndex: Int,
+                                 collectionViewData: VSCollectionViewData,
                                  environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
-        guard let sectionModel = data?.sectionIdentifiers[sectionIndex].sectionModel else { return nil }
-        return sectionHandler.collectionLayout(for: sectionModel,
+        
+        return sectionHandler.collectionLayout(for: collectionViewData,
+                                               section: sectionIndex,
                                                environment: environment)
     }
 }

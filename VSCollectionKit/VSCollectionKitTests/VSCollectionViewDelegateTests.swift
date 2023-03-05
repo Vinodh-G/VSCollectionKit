@@ -16,7 +16,8 @@ class VSCollectionViewDelegateTests: XCTestCase {
     let sectionHandler = VSCollectionViewSectionHandller()
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sectionHandler.registerSectionHandlers(types: [MockSectionType.mockSection1.rawValue: MockSectionHandler.self],
+                                               collectionView: collectionView)
     }
 
     override func tearDown() {
@@ -25,45 +26,66 @@ class VSCollectionViewDelegateTests: XCTestCase {
 
     
     func testDelegateHandlerVerifyDidSelectCell() {
+
+        let collectionData = mockCollectionViewData()
+        let indexPath = IndexPath(item: 0,
+                                  section: 0)
+
+        let collectionViewDelegate = VSCollectionViewDelegate(collectionView: collectionView,
+                                                              sectionHandler: sectionHandler)
+        collectionViewDelegate.data = collectionData
         
-        let delegateHandler = MockDelegateHandler()
-        let collectionViewDelegate = vsDelegate(delegateHandler: delegateHandler)
-        collectionViewDelegate.data = mockCollectionViewData()
-        let expectation = XCTestExpectation(description: "Expect Did Select")
-        
-        delegateHandler.didSelectBlock = { (collectionView, indexPath, cellModel) in
+        let expectation = XCTestExpectation(description: "Expect Did Select Cell")
+
+        let mockSectionHandler = sectionHandler(for: "Section One")
+        // Validation: verify didSelectBlock is triggered when we call didSelectItemAt on VSCollectionViewDelegate
+        mockSectionHandler?.sectionDelegateHandler = MockDelegateHandler(didSelectBlock: { (collectionView, selectedIndexPath, cellModel) in
+            XCTAssertEqual(indexPath, selectedIndexPath)
             expectation.fulfill()
-        }
+        })
         
-        collectionViewDelegate.collectionView(collectionView,
-                                              didSelectItemAt: IndexPath(item: 0,
-                                                                         section: 0))
+        // API to Test
+        collectionViewDelegate.collectionView(collectionView, didSelectItemAt: indexPath)
+        
         wait(for: [expectation], timeout: 1)
     }
     
     func testDelegateHandlerVerifyWillDisplayCell() {
         
-        let delegateHandler = MockDelegateHandler()
-        let collectionViewDelegate = vsDelegate(delegateHandler: delegateHandler)
-        collectionViewDelegate.data = mockCollectionViewData()
-        let expectation = XCTestExpectation(description: "Expect Did Select")
+        let collectionData = mockCollectionViewData()
+        let indexPath = IndexPath(item: 0,
+                                  section: 0)
+
+        let collectionViewDelegate = VSCollectionViewDelegate(collectionView: collectionView,
+                                                              sectionHandler: sectionHandler)
+        collectionViewDelegate.data = collectionData
         
-        delegateHandler.willDisplayBlock = { (collectionView, indexPath, cell, cellModel) in
+        let expectation = XCTestExpectation(description: "Expect Did Select Cell")
+
+        let mockSectionHandler = sectionHandler(for: "Section One")
+        // Validation: verify didSelectBlock is triggered when we call didSelectItemAt on VSCollectionViewDelegate
+        mockSectionHandler?.sectionDelegateHandler = MockDelegateHandler(willDisplayBlock: { (collectionView, incomingIndexPath, cell, cellModel) in
+            XCTAssertEqual(indexPath, incomingIndexPath)
             expectation.fulfill()
-        }
+        })
         
+        // API to Test
         collectionViewDelegate.collectionView(collectionView,
                                               willDisplay: UICollectionViewCell(),
-                                              forItemAt: IndexPath(item: 0, section: 0))
+                                              forItemAt: indexPath)
+        
         wait(for: [expectation], timeout: 1)
     }
-    
-    private func vsDelegate(delegateHandler: MockDelegateHandler) -> VSCollectionViewDelegate {
-        let mockSectionHandler = MockSectionHandler(delegateHadler: delegateHandler)
-        sectionHandler.addSectionHandler(handler: mockSectionHandler)
-        let delegate = VSCollectionViewDelegate(collectionView: collectionView,
-                                                sectionHandler: sectionHandler)
-        return delegate
-    }
 
+    private func sectionHandler(for sectionId: String) -> SectionHandler? {
+        
+        let collectionData = mockCollectionViewData()
+        let indexPath = IndexPath(item: 0,
+                                  section: 0)
+        _ = sectionHandler.cell(for: collectionView,
+                                indexPath: indexPath,
+                                collectionViewData: collectionData)
+        
+        return sectionHandler.sectionHandlers[sectionId]
+    }
 }

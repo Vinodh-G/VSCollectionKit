@@ -54,8 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func albumCollectionView() -> UIViewController {
         let albumViewModel = AlbumCollectionViewModel()
-        let viewController = AlbumsCollectionController()
-        viewController.viewModel = albumViewModel
+        let viewController = AlbumsCollectionController(viewModel: albumViewModel)
         return viewController
     }
 }

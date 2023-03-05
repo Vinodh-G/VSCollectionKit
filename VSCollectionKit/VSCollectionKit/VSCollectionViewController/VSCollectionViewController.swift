@@ -8,7 +8,13 @@
 
 import UIKit
 
-open class VSCollectionViewController: UIViewController {
+public protocol VSSectionHandler {
+    var sectionHandlerTypes: [String: SectionHandler.Type] { get }
+}
+
+public typealias VSViewController = UIViewController & VSSectionHandler
+
+open class VSCollectionViewController: VSViewController {
 
     public var collectionView: UICollectionView!
     public var collectionViewLayout: UICollectionViewLayout!
@@ -17,15 +23,17 @@ open class VSCollectionViewController: UIViewController {
     public var layoutProvider: VSCollectionViewLayoutProviderAPI!
     public var sectionHandler: VSCollectionViewSectionHandlerAPI = VSCollectionViewSectionHandller()
 
+    open var sectionHandlerTypes: [String: SectionHandler.Type] {
+        fatalError("Subclass of VSCollectionViewController should override sectionHandlerTypes: [String: SectionHandler.Type]")
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
-        willAddSectionControllers()
         configureCollectionView()
         configureLayoutProvider()
         configureDataSource()
         configureDelegate()
-        
-        sectionHandler.registerCells(for: collectionView)
+        sectionHandler.registerSectionHandlers(types: sectionHandlerTypes, collectionView: collectionView)
     }
 
     open func willAddSectionControllers() { }
@@ -47,9 +55,12 @@ open class VSCollectionViewController: UIViewController {
         }
         layoutProvider = VSCollectionViewLayoutProvider(collectionView: collectionView,
                                                         sectionHandler: sectionLayoutHandler)
+        
+        
     }
 
     open func apply(collectionData: VSCollectionViewData) {
+                
         delegateHandler.data = collectionData
         layoutProvider.data = collectionData
 
@@ -59,8 +70,10 @@ open class VSCollectionViewController: UIViewController {
     open func configureCollectionView() {
 
         collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (section, enviroment) -> NSCollectionLayoutSection? in
-            return self?.layoutProvider.collectionLayout(for: section,
-                                                  environment: enviroment)
+            guard let self = self else { return nil }
+            return self.layoutProvider.collectionLayout(for: section,
+                                                         collectionViewData: self.dataProvider.snapshot(),
+                                                         environment: enviroment)
         })
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)

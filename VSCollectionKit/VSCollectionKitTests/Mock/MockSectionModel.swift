@@ -7,27 +7,27 @@
 //
 
 import Foundation
-@testable import VSCollectionViewData
+import VSCollectionKit
 
-struct MockSectionModel: SectionModel {
+struct MockSectionModel: SectionViewData {
     var sectionType: String
-    var header: HeaderViewModel?
-    var items: [CellModel] = []
+    var header: SectionHeaderViewData?
+    var cellItems: [CellViewData] = []
     var sectionName: String
-    var sectionID: String
+    var sectionId: String
 
-    init(sectionType: String, sectionName: String) {
+    init(sectionType: String, sectionName: String, sectionId: String) {
         self.sectionType = sectionType
         self.sectionName = sectionName
-        sectionID = ProcessInfo.processInfo.globallyUniqueString
-        header = MockSectionHeader(headerType: sectionType)
+        self.sectionId = sectionId
+        self.header = MockSectionHeader(headerType: sectionType)
 
         for index in 0..<20 {
-            items.append(MockCellModel(cellType: "MockCell", cellInfo: "Cell \(index)"))
+            cellItems.append(MockCellModel(cellType: "MockCell", cellInfo: "Cell \(index)"))
         }
     }
 }
 
-struct MockSectionHeader: HeaderViewModel {
+struct MockSectionHeader: SectionHeaderViewData {
     var headerType: String
 }

@@ -7,41 +7,41 @@
 //
 
 import VSCollectionKit
-import VSCollectionViewData
 import UIKit
 
+enum MockSectionType: String {
+    case mockSection1
+}
+
 class MockSectionHandler: SectionHandler {
-    var type: String {
-        return "MockSection"
-    }
     
-    init(delegateHadler: SectionDelegateHandler? = nil,
-         headerFooterProvider: SectionHeaderFooterProvider? = nil) {
-        sectionDelegateHandler = delegateHadler
-        sectionHeaderFooterProvider = headerFooterProvider
-    }
+    var sectionId: String
+    var type: String
     
     var sectionDelegateHandler: SectionDelegateHandler? = nil
     var sectionHeaderFooterProvider: SectionHeaderFooterProvider?
 
+    required init(sectionType: String, sectionId: String) {
+        self.sectionId = sectionId
+        self.type = sectionType
+        sectionHeaderFooterProvider = MockerHeaderFooterProvider()
+    }
+    
     func registerCells(for collectionView: UICollectionView) {
         collectionView.register(MockCollectionViewCell.self,
                                 forCellWithReuseIdentifier: "mockCell")
-        collectionView.register(MockHeaderView.self,
-                                forSupplementaryViewOfKind: "section-header-element-kind",
-                                withReuseIdentifier: "mockHeader")
     }
 
     func cellProvider(_ collectionView: UICollectionView,
                       _ indexPath: IndexPath,
-                      _ cellModel: CellModel) -> UICollectionViewCell {
+                      _ cellModel: CellViewData) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mockCell", for: indexPath) as! MockCollectionViewCell
         guard let viewModel = cellModel as? MockCellModel else { return cell }
         cell.textLabel.text = viewModel.info
         return cell
     }
 
-    func sectionLayoutProvider(_ sectionModel: SectionModel, _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
+    func sectionLayoutProvider(_ sectionModel: SectionViewData, _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let itemLayout = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -50,7 +50,14 @@ class MockSectionHandler: SectionHandler {
                                                heightDimension: .absolute(44))
         let groupLayout = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                            subitems: [itemLayout])
-        return NSCollectionLayoutSection(group: groupLayout)
+        let layoutSection = NSCollectionLayoutSection(group: groupLayout)
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .absolute(44)),
+            elementKind: "section-header-element-kind",
+            alignment: .top)
+        layoutSection.boundarySupplementaryItems = [sectionHeader]
+        return layoutSection
     }
 }
 
@@ -61,11 +68,13 @@ class MockCollectionViewCell: UICollectionViewCell {
 class MockHeaderView: UICollectionReusableView {}
 
 class MockerHeaderFooterProvider: SectionHeaderFooterProvider {
-    func supplementaryViewProvider(_ collectionView: UICollectionView, _ kind: String, _ indexPath: IndexPath, _ headerViewModel: HeaderViewModel) -> UICollectionReusableView? {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                   withReuseIdentifier: "mockHeader",
-                                                                   for: IndexPath(item: 11, section: 0)) as! MockHeaderView
-        return view
+    
+    func registeHeaderFooterView(for collectionView: UICollectionView) {
+        collectionView.register(MockHeaderView.self, forSupplementaryViewOfKind: "section-header-element-kind", withReuseIdentifier: "mockHeader")
+    }
+    
+    func supplementaryViewProvider(_ collectionView: UICollectionView, _ kind: String, _ indexPath: IndexPath, _ headerViewModel: SectionHeaderViewData) -> UICollectionReusableView? {
+        return MockHeaderView()
     }
 }
 
@@ -74,7 +83,7 @@ class MockLayoutEnvironment: NSObject, NSCollectionLayoutEnvironment {
     var traitCollection: UITraitCollection = .current
 
     class MockLayoutContainer: NSObject, NSCollectionLayoutContainer {
-        var contentSize: CGSize = .zero
+        var contentSize: CGSize = UIScreen.main.bounds.size
         var effectiveContentSize: CGSize = .zero
         var contentInsets: NSDirectionalEdgeInsets = .zero
         var effectiveContentInsets: NSDirectionalEdgeInsets = .zero

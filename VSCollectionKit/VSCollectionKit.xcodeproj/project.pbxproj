@@ -11,9 +11,7 @@
 		5316E27E2444874300D30576 /* MockCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E27D2444874300D30576 /* MockCellModel.swift */; };
 		5316E28024448D2F00D30576 /* MockSectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E27F24448D2F00D30576 /* MockSectionHandler.swift */; };
 		5316E28224448E7100D30576 /* VSCollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */; };
-		5316E2862444DFC900D30576 /* VSCollectionViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */; };
 		531DDD67243C859D0096EC9D /* VSCollectionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */; };
-		531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */; };
 		531DDD6E243C859D0096EC9D /* VSCollectionKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 531DDD60243C859D0096EC9D /* VSCollectionKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531DDD90243C87D50096EC9D /* VSSectionHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD88243C87D50096EC9D /* VSSectionHandlerProtocol.swift */; };
 		531DDD92243C87D50096EC9D /* VSCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8A243C87D50096EC9D /* VSCollectionViewDelegate.swift */; };
@@ -22,12 +20,8 @@
 		531DDD96243C87D50096EC9D /* VSCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8E243C87D50096EC9D /* VSCollectionViewDataSource.swift */; };
 		531DDD97243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DDD8F243C87D50096EC9D /* VSCollectionViewLayoutProvider.swift */; };
 		5354D53D256AA19D00996534 /* MockDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354D53C256AA19D00996534 /* MockDelegateHandler.swift */; };
-		5354D547256AD99400996534 /* VSCollectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354D546256AD99400996534 /* VSCollectionViewControllerTests.swift */; };
 		5363FFA0265A9EAE005B9E44 /* VSCollectionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */; };
 		5363FFA1265A9EAE005B9E44 /* VSCollectionKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		53A1FED22449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */; };
-		53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */; };
-		53A9CB48255DAFE200373F74 /* VSCollectionViewDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */; };
 		53ABA26926088B3300DC844E /* VSCollectionViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ABA26826088B3300DC844E /* VSCollectionViewData.swift */; };
 		53F85A9F244C6A22001451FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85A9E244C6A22001451FB /* AppDelegate.swift */; };
 		53F85AA1244C6A22001451FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85AA0244C6A22001451FB /* SceneDelegate.swift */; };
@@ -38,6 +32,11 @@
 		53F85B0B244CA09E001451FB /* PhotosSectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85B0A244CA09E001451FB /* PhotosSectionHandler.swift */; };
 		53F85B0D244CA11C001451FB /* PhotoTumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F85B0C244CA11C001451FB /* PhotoTumbnailCell.swift */; };
 		53F85B0F244CA5ED001451FB /* PhotoData in Resources */ = {isa = PBXBuildFile; fileRef = 53F85B0E244CA5ED001451FB /* PhotoData */; };
+		CCD965DD29B4960B007DB641 /* VSCollectionViewSectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */; };
+		CCD965DE29B4D845007DB641 /* VSCollectionViewLayoutProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */; };
+		CCD965DF29B4DB3C007DB641 /* VSCollectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354D546256AD99400996534 /* VSCollectionViewControllerTests.swift */; };
+		CCDF33FC2692144300818312 /* PhotoSectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDF33FB2692144300818312 /* PhotoSectionDelegate.swift */; };
+		CCEFA26829AB1F27003D093A /* VSCollectionViewDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,12 +76,10 @@
 		5316E27F24448D2F00D30576 /* MockSectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSectionHandler.swift; sourceTree = "<group>"; };
 		5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
 		5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDelegateTests.swift; sourceTree = "<group>"; };
-		5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDataTests.swift; sourceTree = "<group>"; };
 		531DDD5D243C859D0096EC9D /* VSCollectionKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VSCollectionKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531DDD60243C859D0096EC9D /* VSCollectionKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VSCollectionKit.h; sourceTree = "<group>"; };
 		531DDD61243C859D0096EC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		531DDD66243C859D0096EC9D /* VSCollectionKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VSCollectionKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSCollectionKitTests.swift; sourceTree = "<group>"; };
 		531DDD6D243C859D0096EC9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		531DDD88243C87D50096EC9D /* VSSectionHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSSectionHandlerProtocol.swift; sourceTree = "<group>"; };
 		531DDD8A243C87D50096EC9D /* VSCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +103,7 @@
 		53F85B0A244CA09E001451FB /* PhotosSectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSectionHandler.swift; sourceTree = "<group>"; };
 		53F85B0C244CA11C001451FB /* PhotoTumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTumbnailCell.swift; sourceTree = "<group>"; };
 		53F85B0E244CA5ED001451FB /* PhotoData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PhotoData; sourceTree = "<group>"; };
+		CCDF33FB2692144300818312 /* PhotoSectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,10 +167,8 @@
 		531DDD6A243C859D0096EC9D /* VSCollectionKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				531DDD6B243C859D0096EC9D /* VSCollectionKitTests.swift */,
 				5316E28124448E7100D30576 /* VSCollectionViewDataSourceTests.swift */,
 				5316E28324449F6E00D30576 /* VSCollectionViewDelegateTests.swift */,
-				5316E2852444DFC900D30576 /* VSCollectionViewDataTests.swift */,
 				53A1FED12449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift */,
 				53A1FED32449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift */,
 				5354D546256AD99400996534 /* VSCollectionViewControllerTests.swift */,
@@ -223,6 +219,7 @@
 				53F85AB4244C6ADC001451FB /* AlbumsCollectionController.swift */,
 				53F85B08244C8EFD001451FB /* AlbumsCollectionViewModel.swift */,
 				53F85B0A244CA09E001451FB /* PhotosSectionHandler.swift */,
+				CCDF33FB2692144300818312 /* PhotoSectionDelegate.swift */,
 				53F85B0C244CA11C001451FB /* PhotoTumbnailCell.swift */,
 				53F85AA9244C6A23001451FB /* Assets.xcassets */,
 				53F85AAB244C6A23001451FB /* LaunchScreen.storyboard */,
@@ -388,17 +385,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5316E2862444DFC900D30576 /* VSCollectionViewDataTests.swift in Sources */,
-				53A9CB48255DAFE200373F74 /* VSCollectionViewDelegateTests.swift in Sources */,
+				CCD965DE29B4D845007DB641 /* VSCollectionViewLayoutProviderTests.swift in Sources */,
+				CCD965DF29B4DB3C007DB641 /* VSCollectionViewControllerTests.swift in Sources */,
 				5316E28024448D2F00D30576 /* MockSectionHandler.swift in Sources */,
-				53A1FED22449A47700BB7F0C /* VSCollectionViewSectionHandlerTests.swift in Sources */,
 				5316E27E2444874300D30576 /* MockCellModel.swift in Sources */,
 				5354D53D256AA19D00996534 /* MockDelegateHandler.swift in Sources */,
 				5316E28224448E7100D30576 /* VSCollectionViewDataSourceTests.swift in Sources */,
-				531DDD6C243C859D0096EC9D /* VSCollectionKitTests.swift in Sources */,
-				5354D547256AD99400996534 /* VSCollectionViewControllerTests.swift in Sources */,
+				CCD965DD29B4960B007DB641 /* VSCollectionViewSectionHandlerTests.swift in Sources */,
+				CCEFA26829AB1F27003D093A /* VSCollectionViewDelegateTests.swift in Sources */,
 				5316E27C2444872300D30576 /* MockSectionModel.swift in Sources */,
-				53A1FED42449B74300BB7F0C /* VSCollectionViewLayoutProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +403,7 @@
 			files = (
 				53F85B0D244CA11C001451FB /* PhotoTumbnailCell.swift in Sources */,
 				53F85AB5244C6ADC001451FB /* AlbumsCollectionController.swift in Sources */,
+				CCDF33FC2692144300818312 /* PhotoSectionDelegate.swift in Sources */,
 				53F85B09244C8EFD001451FB /* AlbumsCollectionViewModel.swift in Sources */,
 				53F85A9F244C6A22001451FB /* AppDelegate.swift in Sources */,
 				53F85AA1244C6A22001451FB /* SceneDelegate.swift in Sources */,
@@ -576,7 +572,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VSCollectionKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,7 +601,7 @@
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = VSCollectionKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -627,6 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XYPCYQXKC;
 				INFOPLIST_FILE = VSCollectionKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,6 +643,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XYPCYQXKC;
 				INFOPLIST_FILE = VSCollectionKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -665,6 +663,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XYPCYQXKC;
 				INFOPLIST_FILE = CollectionKitTestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -683,6 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XYPCYQXKC;
 				INFOPLIST_FILE = CollectionKitTestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

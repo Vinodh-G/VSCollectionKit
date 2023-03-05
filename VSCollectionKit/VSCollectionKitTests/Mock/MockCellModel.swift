@@ -7,16 +7,16 @@
 //
 
 import Foundation
-@testable import VSCollectionViewData
+@testable import VSCollectionKit
 
-struct MockCellModel: CellModel {
+struct MockCellModel: CellViewData {
     let cellType: String
     let info: String
-    let cellID: String
+    let cellId: String
     
-    init(cellType: String, cellInfo: String) {
+    init(cellType: String, cellInfo: String, cellId: String = ProcessInfo.processInfo.globallyUniqueString) {
         self.cellType = cellType
         self.info = cellInfo
-        cellID = ProcessInfo.processInfo.globallyUniqueString
+        self.cellId = cellId
     }
 }

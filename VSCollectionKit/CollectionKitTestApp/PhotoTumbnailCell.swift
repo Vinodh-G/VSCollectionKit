@@ -20,10 +20,21 @@ class PhotoTumbnailCell: UICollectionViewCell {
         return imageV
     }()
 
+    lazy var selectionView: UIView = {
+        let imageV = UIView()
+        imageV.alpha = 0.5
+        imageV.backgroundColor = .white
+        imageV.translatesAutoresizingMaskIntoConstraints = false
+        imageV.clipsToBounds = true
+        return imageV
+    }()
+
+    
     var cellModel: PhotoCellModel? {
         didSet {
-            guard let imageUrl = cellModel?.photoURL else { return }
-            imageView.image = UIImage(named: imageUrl)
+            guard let cellModel = cellModel else { return }
+            imageView.image = UIImage(named: cellModel.photoURL)
+            selectionView.alpha = cellModel.isSelected ? 0.8 : 0.0
         }
     }
 
@@ -44,11 +55,17 @@ class PhotoTumbnailCell: UICollectionViewCell {
 
     private func setUpView() {
         contentView.addSubview(imageView)
+        contentView.addSubview(selectionView)
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            selectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            selectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            selectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            selectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
 }

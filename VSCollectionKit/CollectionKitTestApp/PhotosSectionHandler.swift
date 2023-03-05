@@ -8,15 +8,17 @@
 
 import UIKit
 import VSCollectionKit
-//import VSCollectionViewData
 
 class PhotosSectionHandler: SectionHandler {
-    
+    var sectionId: String
+    var type: String
+    private var photosSelection: PhotosSelectionAPI? = nil
     var sectionHeaderFooterProvider: SectionHeaderFooterProvider? = nil
     var sectionDelegateHandler: SectionDelegateHandler? = nil
     
-    var type: String {
-        return AlbumSectionType.photos.rawValue
+    required init(sectionType: String, sectionId: String) {
+        self.sectionId = sectionId
+        self.type = sectionType
     }
 
     func registerCells(for collectionView: UICollectionView) {
@@ -25,7 +27,7 @@ class PhotosSectionHandler: SectionHandler {
     
     func cellProvider(_ collectionView: UICollectionView,
                       _ indexPath: IndexPath,
-                      _ cellModel: CellModel) -> UICollectionViewCell {
+                      _ cellModel: CellViewData) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoTumbnailCell.resuseId,
                                                             for: indexPath) as? PhotoTumbnailCell,
             let photoCellModel = cellModel as? PhotoCellModel else {
@@ -36,7 +38,7 @@ class PhotosSectionHandler: SectionHandler {
         return cell
     }
 
-    func sectionLayoutProvider(_ sectionModel: SectionModel,
+    func sectionLayoutProvider(_ sectionModel: SectionViewData,
                                _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
 
         let groupLayout = NSCollectionLayoutGroup.vertical(layoutSize: LayoutSizeInfo.mainGroupLayoutSize,

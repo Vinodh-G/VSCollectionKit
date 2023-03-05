@@ -9,13 +9,13 @@
 import UIKit
 
 public protocol VSCollectionViewDelegateAPI: UICollectionViewDelegate {
-    var data: VSCollectionViewData? { get set }
+    var data: VSCollectionViewData { get set }
 }
 
 public class VSCollectionViewDelegate: NSObject, VSCollectionViewDelegateAPI {
 
     unowned private var collectionView: UICollectionView
-    public var data: VSCollectionViewData?
+    public var data: VSCollectionViewData = VSCollectionViewData()
     unowned private var sectionHandler: VSCollectionViewSectionDelegateHandlerAPI
 
     public init(collectionView: UICollectionView,
@@ -29,20 +29,17 @@ public class VSCollectionViewDelegate: NSObject, VSCollectionViewDelegateAPI {
     public func collectionView(_ collectionView: UICollectionView,
                                willDisplay cell: UICollectionViewCell,
                                forItemAt indexPath: IndexPath) {
-        guard let collectionData = data else { return }
-        let sectionModel = collectionData.sectionIdentifiers[indexPath.section].sectionModel
         sectionHandler.willDisplayCell(collectionView: collectionView,
                                        indexPath: indexPath,
                                        cell: cell,
-                                       sectionModel: sectionModel)
+                                       collectionViewData: data)
     }
 
     public func collectionView(_ collectionView: UICollectionView,
                                didSelectItemAt indexPath: IndexPath) {
-        guard let collectionData = data else { return }
-        let sectionModel = collectionData.sectionIdentifiers[indexPath.section].sectionModel
+        
         sectionHandler.didSelectItemAt(collectionView,
                                        indexPath: indexPath,
-                                       sectionModel: sectionModel)
+                                       collectionViewData: data)
     }
 }

@@ -8,28 +8,35 @@
 
 import UIKit
 import VSCollectionKit
-import VSCollectionViewData
 
 typealias DidSelectBlock = (_ collectionView: UICollectionView,
                             _ indexPath: IndexPath,
-                            _ cellModel: CellModel) -> Void
+                            _ cellModel: CellViewData) -> Void
 
-typealias WillDisplayBlock = (_ collectionView: UICollectionView,
-                              _ indexPath: IndexPath, _ cell: UICollectionViewCell,
-                              _ cellModel: CellModel) -> Void
+typealias WillDisplayBlock = ((_ collectionView: UICollectionView,
+                              _ indexPath: IndexPath,
+                              _ cell: UICollectionViewCell,
+                              _ cellModel: CellViewData) -> Void)
 
 class MockDelegateHandler: SectionDelegateHandler {
     
     var didSelectBlock: DidSelectBlock?
     var willDisplayBlock: WillDisplayBlock?
+    init(willDisplayBlock: @escaping WillDisplayBlock) {
+        self.willDisplayBlock = willDisplayBlock
+    }
     
-    func didSelect(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ cellModel: CellModel) {
+    init(didSelectBlock: @escaping DidSelectBlock) {
+        self.didSelectBlock = didSelectBlock
+    }
+    
+    func didSelect(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ cellModel: CellViewData) {
         didSelectBlock?(collectionView,
                         indexPath,
                         cellModel)
     }
     
-    func willDisplayCell(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ cell: UICollectionViewCell, _ cellModel: CellModel) {
+    func willDisplayCell(_ collectionView: UICollectionView, _ indexPath: IndexPath, _ cell: UICollectionViewCell, _ cellModel: CellViewData) {
         willDisplayBlock?(collectionView,
                          indexPath,
                          cell,
