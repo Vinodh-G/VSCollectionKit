@@ -39,9 +39,8 @@ The SectionModel, CellModel and HeaderViewModel protocols looks somthing like be
 ```
 public protocol SectionViewData {
     var sectionType: String { get }
-    var sectionID: String { get }
-    var header: HeaderViewModel? { get }
-    var items: [CellViewData] { get set }
+    var sectionId: String { get }
+    var header: SectionHeaderViewData? { get }
 }
 
 public protocol HeaderViewData {
