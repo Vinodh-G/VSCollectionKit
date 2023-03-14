@@ -49,13 +49,12 @@ class CollectionViewController: VSCollectionViewController {
         collectionView.register(MockCollectionViewCell.self,
                                 forCellWithReuseIdentifier: "CellId")
         dataProvider = MockCollectionViewDataSource(collectionView: collectionView,
-                                                    cellProvider: { collectionView, indexPath, itemIdentifier in
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellId",
-                                                      for: indexPath)
-        })
+                                                    sectionHandler: VSCollectionViewSectionHandller())
     }
 }
 
-class MockCollectionViewDataSource: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot>, VSCollectionViewDataSourceAPI {
-    
+class MockCollectionViewDataSource: VSCollectionViewDataSource {
+    override func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+    }
 }

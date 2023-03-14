@@ -1,0 +1,7 @@
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// IPHONEOS_DEPLOYMENT_TARGET = 15.0
+FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(inherited) $(PROJECT_DIR)/../DependantModules/Simulator/MessageService.xcframework/ios-arm64_x86_64-simulator/
+FRAMEWORK_SEARCH_PATHS[sdk=*] = $(inherited) $(PROJECT_DIR)/../DependantModules/Device/MessageService.xcframework/ios-arm64/ $(PROJECT_DIR)/../Shared/BookingService.xcframework/ios-arm64/
+

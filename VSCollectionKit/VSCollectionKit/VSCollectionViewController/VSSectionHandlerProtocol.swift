@@ -8,6 +8,11 @@
 
 import UIKit
 
+public protocol SectionLayoutInfo: AnyObject {
+    func sectionLayoutProvider(_ sectionViewData: SectionViewData,
+                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
+}
+
 public protocol SectionHandler: SectionLayoutInfo {
     init(sectionType: String, sectionId: String)
     var type: String { get }
@@ -19,6 +24,7 @@ public protocol SectionHandler: SectionLayoutInfo {
     
     var sectionHeaderFooterProvider: SectionHeaderFooterProvider? { get }
     var sectionDelegateHandler: SectionDelegateHandler? { get set }
+    var parentViewController: Weak<UIViewController>? { get set }
 }
 
 public protocol SectionHeaderFooterProvider: AnyObject {
@@ -29,10 +35,6 @@ public protocol SectionHeaderFooterProvider: AnyObject {
                                    _ headerViewData: SectionHeaderViewData) -> UICollectionReusableView?
 }
 
-public protocol SectionLayoutInfo: AnyObject {
-    func sectionLayoutProvider(_ sectionViewData: SectionViewData,
-                               _ environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?
-}
 
 public protocol SectionDelegateHandler: AnyObject {
     func didSelect(_ collectionView: UICollectionView,
@@ -42,4 +44,17 @@ public protocol SectionDelegateHandler: AnyObject {
                          _ indexPath: IndexPath,
                          _ cell: UICollectionViewCell,
                          _ cellViewData: CellViewData)
+}
+
+public class Weak<T: AnyObject> {
+  public weak var reference : T?
+  init (reference: T?) {
+    self.reference = reference
+  }
+}
+
+public extension SectionHandler {
+    var parentViewController: Weak<UIViewController>? {
+        return nil
+    }
 }

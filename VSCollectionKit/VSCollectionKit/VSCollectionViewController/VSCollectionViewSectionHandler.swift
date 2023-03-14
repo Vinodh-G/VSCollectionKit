@@ -8,11 +8,12 @@
 
 import UIKit
 
-public protocol VSCollectionViewSectionHandlerAPI: AnyObject {
+public protocol VSCollectionViewSectionHandlerAPI: AnyObject, VSCollectionViewPreFetcherAPI {
 
     var sectionHandlers: [String: SectionHandler] { get }
+    var collectionViewController: VSCollectionViewController? { get set }
     func registerSectionHandlers(types: [String: SectionHandler.Type],
-                                 collectionView: UICollectionView)
+                                        collectionView: UICollectionView)
     func removeSectionHandler(type: String)
     func numOfRows(for collectionViewData: VSCollectionViewData, sectionIndex: Int) -> Int
     func cell(for collectionView: UICollectionView,
@@ -24,11 +25,12 @@ public protocol VSCollectionViewSectionHandlerAPI: AnyObject {
                            collectionViewData: VSCollectionViewData) -> UICollectionReusableView?
 }
 
-public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI {
+class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI {
         
-    public init() {}
-    public weak var collectionView: UICollectionView? = nil
+    init() { }
     
+    weak var collectionView: UICollectionView? = nil
+    weak var collectionViewController: VSCollectionViewController? = nil
     private var sectionHandlersType: [String: SectionHandler.Type] = [:]
     public var sectionHandlers: [String: SectionHandler] = [:]
 
@@ -80,6 +82,7 @@ public class VSCollectionViewSectionHandller: VSCollectionViewSectionHandlerAPI 
             }
             
             let newSectionHandler = newSectionType.init(sectionType: sectionType, sectionId: sectionId)
+            newSectionHandler.parentViewController = Weak(reference: collectionViewController)
             register(newSectionHandler: newSectionHandler)
             return newSectionHandler
         }

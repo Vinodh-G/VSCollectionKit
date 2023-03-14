@@ -1,0 +1,11 @@
+framework module MessageService {
+  umbrella header "MessageService.h"
+
+  export *
+  module * { export * }
+}
+
+module MessageService.Swift {
+  header "MessageService-Swift.h"
+  requires objc
+}

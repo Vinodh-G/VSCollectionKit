@@ -22,7 +22,10 @@ open class VSCollectionViewController: VSViewController {
     public var delegateHandler: VSCollectionViewDelegateAPI!
     public var layoutProvider: VSCollectionViewLayoutProviderAPI!
     public var sectionHandler: VSCollectionViewSectionHandlerAPI = VSCollectionViewSectionHandller()
-
+    
+    open var preFetchDidTrigger: PreFetchDidTrigger?
+    open var preFetchDidCancel: PreFetchDidCancel?
+    
     open var sectionHandlerTypes: [String: SectionHandler.Type] {
         fatalError("Subclass of VSCollectionViewController should override sectionHandlerTypes: [String: SectionHandler.Type]")
     }
@@ -33,7 +36,9 @@ open class VSCollectionViewController: VSViewController {
         configureLayoutProvider()
         configureDataSource()
         configureDelegate()
-        sectionHandler.registerSectionHandlers(types: sectionHandlerTypes, collectionView: collectionView)
+        sectionHandler.registerSectionHandlers(types: sectionHandlerTypes,
+                                               collectionView: collectionView)
+        sectionHandler.collectionViewController = self
     }
 
     open func willAddSectionControllers() { }
@@ -41,6 +46,7 @@ open class VSCollectionViewController: VSViewController {
     open func configureDataSource() {
         dataProvider = VSCollectionViewDataSource(collectionView: collectionView,
                                                   sectionHandler: sectionHandler)
+        collectionView.prefetchDataSource = dataProvider
     }
 
     open func configureDelegate() {

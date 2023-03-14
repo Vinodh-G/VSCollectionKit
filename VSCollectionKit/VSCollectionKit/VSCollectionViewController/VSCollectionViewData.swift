@@ -56,3 +56,16 @@ public protocol CellViewData {
     var cellType: String { get }
     var cellId: String { get }
 }
+
+
+protocol CollectionViewData <SectionIdentifierType, ItemIdentifierType> {
+    associatedtype SectionIdentifierType
+    associatedtype ItemIdentifierType
+    mutating func moveSection(_ identifier: SectionIdentifierType, afterSection toIdentifier: SectionIdentifierType)
+
+    mutating func reloadSections(_ identifiers: [SectionIdentifierType])
+}
+
+extension VSCollectionViewData: CollectionViewData {
+
+}

@@ -15,6 +15,7 @@ enum MockSectionType: String {
 
 class MockSectionHandler: SectionHandler {
     
+    
     var sectionId: String
     var type: String
     

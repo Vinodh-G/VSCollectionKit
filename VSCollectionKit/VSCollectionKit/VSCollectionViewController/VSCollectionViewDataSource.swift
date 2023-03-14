@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol VSCollectionViewDataSourceAPI: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot> {
+public protocol VSCollectionViewDataSourceAPI: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot>, UICollectionViewDataSourcePrefetching {
 }
 
 
@@ -24,8 +24,8 @@ fileprivate struct SupplymentryViewConstant {
     }
 }
 
-public class VSCollectionViewDataSource: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot>,
-                                        VSCollectionViewDataSourceAPI {
+public class VSCollectionViewDataSource: UICollectionViewDiffableDataSource<SectionSnapshot, CellSnapshot>, VSCollectionViewDataSourceAPI,
+                                         UICollectionViewDataSourcePrefetching {
     
     unowned private var sectionHandler: VSCollectionViewSectionHandlerAPI
     unowned private var collectionView: UICollectionView
@@ -57,6 +57,16 @@ public class VSCollectionViewDataSource: UICollectionViewDiffableDataSource<Sect
                                                 kind: kind,
                                                 indexPath: indexPath,
                                                 collectionViewData: snapshot()) ?? emptyView
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView,
+                               prefetchItemsAt indexPaths: [IndexPath]) {
+        sectionHandler.collectionView(collectionView, prefetchItemsAt: indexPaths)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView,
+                               cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        sectionHandler.collectionView(collectionView, cancelPrefetchingForItemsAt: indexPaths)
     }
     
     private func registedPlaceholderSupplymentryView(for collectionView: UICollectionView) {
