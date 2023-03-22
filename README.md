@@ -7,12 +7,11 @@ VSCollectionView a handy framework supporting functionality of a UICollectionVie
 
 |         | What do we get ? |
 ----------|-----------------
-&#127968; | Better Composable Architecture, work induiviually on smaller independant funtional components, single responsible cell type handler (rendering, editing, delegtion, layouting)
-&#127970; | Default to dynamic height for a cell, header, everything is totally customisable.
-&#128288; | Create collections with multiple data types, multiple cells types, section types, what not.
-&#128581; | Stay Away from reloadData() & performBatchUpdates(:, completion:) relaoding entire collectionview
-&#9989;   | Fully unit tested
-&#128269; | No perform `performBatchUpdates(_:, completion:)` or `reloadData()` again
+&#127968; | A better composable architecture that allows you to work individually on smaller, independent functional components. (rendering, editing, delegtion, layouting)
+&#127970; | Default dynamic height for cells and headers that is totally customizable.
+&#128288; | The ability to create collections with multiple data types, multiple cell types, and section types.
+&#128581; | No perform `performBatchUpdates(_:, completion:)` or `reloadData()`, Improved performance by __avoiding__ the use of `reloadData()` and `performBatchUpdates(_:completion:)`.
+&#9989;   | Fully unit tested implementation.
 &#128241; | Simply `UICollectionView` at its core
 &#128640; | Extendable API
 &#128038; | Written in pusre Swift, extensible to SwiftUI
