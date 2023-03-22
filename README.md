@@ -5,6 +5,18 @@
 
 VSCollectionView a handy framework supporting functionality of a UICollectionView or UICollectionViewController in a much simpler way. VSCollectionKit also avoids a lot of collectionView related code hassle and duplicates.
 
+|         | What do we get ? |
+----------|-----------------
+&#127968; | Better Composable Architecture, work induiviually on smaller independant funtional components, single responsible cell type handler (rendering, editing, delegtion, layouting)
+&#127970; | Default to dynamic height for a cell, header, everything is totally customisable.
+&#128288; | Create collections with multiple data types, multiple cells types, section types, what not.
+&#128581; | Stay Away from reloadData() & performBatchUpdates(:, completion:) relaoding entire collectionview
+&#9989;   | Fully unit tested
+&#128269; | No perform `performBatchUpdates(_:, completion:)` or `reloadData()` again
+&#128241; | Simply `UICollectionView` at its core
+&#128640; | Extendable API
+&#128038; | Written in pusre Swift, extensible to SwiftUI
+
 Lets see what we get using this kit for developing the application views.
 
 **Composition:** VSCollectionKit breaks down larger features into smaller components that can be isolated modules and be easily combined to form a full feature.
@@ -16,6 +28,10 @@ Lets see what we get using this kit for developing the application views.
 Here is an example that helps you to understand better. The screenshots of the Test app developed using VSCollectionKit presented below.
 ![](Images/VSCollectionKit_Examples2.png)
 
+<p float="left", align="center">
+<img src="Images/SimpleLoading_And_TripDetailsCell.gif" width="236" height="511"> 
+<img src="Images/ShimmerLoading_And_infiniteScrollingCells.gif" width="236" height="511">
+</p>
 
 ### VSCollectionKit Components
 VSCollectionKit consist of VSCollectionViewController which  is subclass of UIViewController with UICollectionView. 
